@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unique(['user_id', 'product_id']);
             $table->string('titel');
             $table->text('body');
+            $table->text('answer');
             $table->enum('star', ['1', '2', '3', '4', '5']);
             $table->enum('status', ['Accepted', 'failed']);
             $table->timestamps();
