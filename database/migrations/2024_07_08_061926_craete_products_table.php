@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('price');
-            $table->intiger('time');
-            $table->intiger('age_limited');
+            $table->integer('time');
+            $table->integer('age_limited');
             $table->integer('total');
             $table->integer('remaning');
             $table->text('description');
