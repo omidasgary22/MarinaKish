@@ -14,7 +14,7 @@ class Order extends Model
         'beath',
         'factor_id'
     ];
-    protected $cast =[
+    protected $casts =[
         'user_id'=> 'integer',
         'status'=>'enum',
         'beath'=>'datetime',

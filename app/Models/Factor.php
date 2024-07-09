@@ -13,7 +13,7 @@ class Factor extends Model
         'total_price',
         'status'
     ];
-    protected $cast = [
+    protected $casts = [
         'order_id' => 'integer',
         'total_price' => 'integer',
         'status' => 'enum'

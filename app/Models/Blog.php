@@ -12,7 +12,7 @@ class Blog extends Model
         'title',
         'content',
     ];
-    protected $cast = [
+    protected $casts = [
         'title' => 'string',
         'content' => 'text'
     ];

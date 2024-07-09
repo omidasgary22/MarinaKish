@@ -11,7 +11,7 @@ class Label extends Model
     protected $fillable = [
         'name'
     ];
-    protected $cast = [
+    protected $casts = [
         'name' => 'string'
     ];
 }
