@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('code');
             $table->integer('percent');
             $table->integer('number');
-            $table->datetimes('expire_time');
+            $table->datetime('expire_time');
             $table->timestamps();
+
         });
     }
 
