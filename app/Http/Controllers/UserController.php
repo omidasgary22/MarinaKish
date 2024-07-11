@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $user = new User();
         $user->create($request->toArray());
-        return response()->json();
+        return response()->json($request);
     }
 
 
