@@ -6,7 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use PHPUnit\TextUI\Configuration\Merger;
 
 class User extends Authenticatable
 {
@@ -20,9 +22,9 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'email',
-        'phone_number',
+        'phone',
         'birth_day',
-        'code_meli',
+        'national_code',
         'password',
     ];
 
@@ -43,5 +45,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password'=>'hashed',
     ];
 }
