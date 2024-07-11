@@ -16,7 +16,7 @@ class Comment extends Model
         'star',
         'status'
     ];
-    protected $cast =[
+    protected $casts =[
         'user_id'=>'integer',
         'product_id'=>'integer',
         'title'=>'string',

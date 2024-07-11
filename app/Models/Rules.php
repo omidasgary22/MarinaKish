@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Label extends Model
+class Rules extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name'
+    protected $fillable =[
+        'body'
     ];
     protected $casts = [
-        'name' => 'string'
+        'body' => 'string'
     ];
 }

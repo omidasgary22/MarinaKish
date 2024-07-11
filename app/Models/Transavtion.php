@@ -13,7 +13,7 @@ class Transavtion extends Model
         'tracking_code',
         'information'
     ];
-    protected $cast = [
+    protected $casts = [
         'email' => 'string',
         'tracking_cod' => 'bigint',
         'information' => 'json'

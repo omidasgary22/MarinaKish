@@ -17,7 +17,7 @@ class Product extends Model
         'remaning',
         'description'
     ];
-    protected $cast = [
+    protected $casts = [
         'name' => 'string',
         'price' => 'bigint',
         'age_limited' => 'integer',

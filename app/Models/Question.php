@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Label extends Model
+class Question extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'question',
+        'answer'
     ];
     protected $casts = [
-        'name' => 'string'
+        'question' => 'string',
+        'answer' => 'string'
     ];
 }

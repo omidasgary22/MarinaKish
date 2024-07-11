@@ -13,7 +13,7 @@ class Setting extends Model
         'value',
         'type'
     ];
-    protected $cast = [
+    protected $casts = [
         'key'=>'string',
         'value'=>'text',
         'type'=>'enum'
