@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('total');
             $table->integer('remaning');
             $table->text('description');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
