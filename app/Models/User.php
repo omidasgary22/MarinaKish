@@ -21,9 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'email',
-        'phone_number',
+        'phone',
         'birth_day',
-        'code_meli',
+        'national_code',
         'password',
     ];
 
@@ -44,12 +44,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        //'password' => 'hashed'
     ];
-    public function comments():HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
-    public function orders():HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
