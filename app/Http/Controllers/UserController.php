@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,7 @@ class UserController extends Controller
         $token = $user->createToken($code)->plainTextToken;
         return response()->json(['token'=>$token]);
     }
-    public function create(Request $request)
+    public function create(RegisterRequest $request)
     {
         $User = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
         return response()->json($User);
