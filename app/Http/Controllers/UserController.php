@@ -34,8 +34,9 @@ class UserController extends Controller
     {
         $user = new User();
         if (Auth::user()){
+            $user = $user->find(Auth::id());
             if ($user->hasRole('admin')) {
-                $users = $user->with('comments', 'orders')->orderBy('desc')->paginate(10);
+                $users = $user->with('comments', 'orders')->orderBy('created_at', 'desc')->paginate(10);
             }
         }
         return response()->json($users);
