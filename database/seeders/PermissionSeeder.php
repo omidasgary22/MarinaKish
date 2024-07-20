@@ -16,7 +16,9 @@ class PermissionSeeder extends Seeder
     {
         $user = Role::create(['name' => 'user']);
         $admin = Role::create(['name' => 'admin']);
-        $user_index = Permission::create(['name' => 'user index']);
-        $user_index->assignRole('admin','user');
+        $user_index = Permission::create(['name' => 'user.index']);
+        $me = Permission::create(['name' => 'me']);
+        $me->assignRole('admin','user');
+        $user_index->assignRole('admin');
     }
 }
