@@ -27,11 +27,11 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $User = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
+        $User->assignRole('User');
         return response()->json($User);
     }
     public function index()
     {
-        dd(Auth::id());
         $user = new User();
         if (Auth::user()){
             if ($user->hasRole('admin')) {
