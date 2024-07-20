@@ -22,4 +22,5 @@ Route::post('login',[UserController::class,'login'])->name('login');
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function(){
     Route::get('/index','index')->middleware('permission:user.index')->name('index');
     Route::get('/ME','me')->middleware('permission:me')->name('dashboard');
+    Route::post('update_profile','update')->middleware('permission:profile.update')->name('update_profile');
 });

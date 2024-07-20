@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +25,18 @@ class UserController extends Controller
         $token = $user->createToken($code)->plainTextToken;
         return response()->json(['token'=>$token]);
     }
-    public function create(Request $request)
+    public function create(RegisterRequest $request)
     {
         $user = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
         $user->assignRole('user');
         return response()->json($user);
+    }
+    public function update(UserUpdateRequest $request)
+    {
+        $user = new User();
+        $user->where('id',Auth::id())->update($request->toArray());
+        $updated = $user->where('id',Auth::id())->first();
+        return response()->json($updated);
     }
     public function index()
     {
