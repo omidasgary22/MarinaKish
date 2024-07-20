@@ -18,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register',[UserController::class,'create'])->name('register');
 Route::post('login',[UserController::class,'login'])->name('login');
+
+Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function(){
+    Route::get('/index','index')->name('index');
+});
