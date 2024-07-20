@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use PHPUnit\TextUI\Configuration\Merger;
 
 class User extends Authenticatable
 {
@@ -44,7 +46,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+<<<<<<< HEAD
+        'password'=>'hashed',
+=======
         //'password' => 'hashed'
+>>>>>>> mohammad
     ];
     public function comments(): HasMany
     {
