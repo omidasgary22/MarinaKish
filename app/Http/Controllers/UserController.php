@@ -36,10 +36,16 @@ class UserController extends Controller
         if (Auth::user()){
             if ($user->hasRole('admin')) {
                 $users = $user->with('comments', 'orders')->orderBy('desc')->paginate(10);
-            }elseif ($user->hasRole('user')){
-                $users = $user->with('comments', 'orders')->where('id',Auth::id())->first();
             }
         }
         return response()->json($users);
+    }
+    public function me()
+    {
+        if (Auth::user()){
+            $user = new User();
+            $me = $user->with('comments', 'orders')->where('id',Auth::id())->first();
+        }
+        return response()->json($me);
     }
 }
