@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
+        'name',
         'email',
         'phone',
         'birth_day',
@@ -44,7 +44,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        //'password' => 'hashed'
+        'password' => 'hashed'
     ];
     public function comments(): HasMany
     {
