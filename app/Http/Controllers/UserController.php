@@ -26,9 +26,9 @@ class UserController extends Controller
     }
     public function create(Request $request)
     {
-        $User = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
-        $User->assignRole('User');
-        return response()->json($User);
+        $user = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
+        $user->assignRole('user');
+        return response()->json($user);
     }
     public function index()
     {
