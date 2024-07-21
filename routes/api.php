@@ -23,5 +23,5 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
     Route::get('ME', 'me')->middleware('permission:me')->name('dashboard');
     Route::post('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
-    Route::delete('delete', 'destroy')->name('users.destroy');
+    Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
 });
