@@ -28,5 +28,14 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    
+    public function messages()
+    {
+        return [
+            'name.required' => 'نام الزامی است.',
+            'national_code.required' => 'کد ملی الزامی است.',
+            'national_code.unique' => 'کد ملی باید منحصر به فرد باشد.',
+            'phone_number.required' => 'شماره موبایل الزامی است.',
+            'phone_number.unique' => 'شماره موبایل باید منحصر به فرد باشد.',
+        ];
+    }
 }
