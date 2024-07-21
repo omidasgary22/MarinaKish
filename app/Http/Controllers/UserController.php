@@ -59,10 +59,13 @@ class UserController extends Controller
         return response()->json($me);
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $user = User::findOrfail($id);
-        $user->delete();
-        return response()->json(['message' => 'کاربر با موفقیت حذف شد.'], 200);
+        if (Auth::user()) {
+            $user = new User();
+            $user = $user->findOrfail(Auth::id());
+            $user->delete();
+            return response()->json(['message' => 'کاربر با موفقیت حذف شد.']);
+        }
     }
 }
