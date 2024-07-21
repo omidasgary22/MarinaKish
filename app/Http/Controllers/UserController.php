@@ -19,11 +19,12 @@ class UserController extends Controller
         $user = User::select('id', 'national_code', 'password')->where('national_code', $code)->first();
         if (!$user) {
             return response()->json('national_code wrong');
-        }if(!Hash::check($password ,$user->password)){
+        }
+        if (!Hash::check($password, $user->password)) {
             return response()->json('password wrong');
         }
         $token = $user->createToken($code)->plainTextToken;
-        return response()->json(['token'=>$token]);
+        return response()->json(['token' => $token]);
     }
     public function create(RegisterRequest $request)
     {
@@ -34,27 +35,34 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request)
     {
         $user = new User();
-        $user->where('id',Auth::id())->update($request->toArray());
-        $updated = $user->where('id',Auth::id())->first();
+        $user->where('id', Auth::id())->update($request->toArray());
+        $updated = $user->where('id', Auth::id())->first();
         return response()->json($updated);
     }
     public function index()
     {
         $user = new User();
-        if (Auth::user()){
+        if (Auth::user()) {
             $user = $user->find(Auth::id());
             if ($user->hasRole('admin')) {
-                $users = $user->with('comments', 'orders','tickets')->orderBy('created_at', 'desc')->paginate(10);
+                $users = $user->with('comments', 'orders', 'tickets')->orderBy('created_at', 'desc')->paginate(10);
             }
         }
         return response()->json($users);
     }
     public function me()
     {
-        if (Auth::user()){
+        if (Auth::user()) {
             $user = new User();
-            $me = $user->with('comments', 'orders','tickets')->where('id',Auth::id())->first();
+            $me = $user->with('comments', 'orders', 'tickets')->where('id', Auth::id())->first();
         }
         return response()->json($me);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrfail($id);
+        $user->delete();
+        return response()->json(['message' => 'کاربر با موفقیت حذف شد.'], 200);
     }
 }
