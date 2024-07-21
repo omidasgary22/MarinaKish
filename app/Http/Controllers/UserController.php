@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-<<<<<<< HEAD
-=======
     public function login(Request $request)
     {
         $code = $request->national_code;
@@ -59,5 +57,4 @@ class UserController extends Controller
         }
         return response()->json($me);
     }
->>>>>>> a6ac3206078ca31043825320d408d5b3fa9a4bf2
 }
