@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('time');
             $table->integer('age_limited');
             $table->integer('total');
-            $table->integer('remaning');
+            $table->integer('pending');
             $table->text('description');
             $table->text('tip');
             $table->enum('off_suggestion',['yes','no']);
