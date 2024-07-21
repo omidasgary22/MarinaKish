@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetpasswordRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,5 +68,23 @@ class UserController extends Controller
             $user->delete();
             return response()->json(['message' => 'کاربر با موفقیت حذف شد.']);
         }
+    }
+    public function resetPassword(Request $request)
+    {
+        $user = new User();
+        $old_password = $request->old_password;
+        $new_password = $request->new_password;
+        if(Auth::user())
+        {
+            $password = $user->where('id',Auth::id())->first();
+            dd(Hash::check($password->password, $old_password));
+            if ('ddd' == 'sss') {
+                return response()->json('old password wrong');
+            }
+            $password = $password->update(['password'=>$new_password])->where('id',Auth::id());
+
+            $user = $user->where('id',Auth::id())->first();
+        }
+        return response()->json($user);
     }
 }
