@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->string('key');
-            $table->text('value');
-            $table->enum('type', ['json', 'string']);
+        Schema::create('rules', function (Blueprint $table) {
+            $table->id();
+            $table->text('body');
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('rules');
     }
 };

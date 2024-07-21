@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('product_id');
+            $table->unique(['user_id', 'product_id']);
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation']);
             $table->dateTime('beath');
             $table->timestamps();
