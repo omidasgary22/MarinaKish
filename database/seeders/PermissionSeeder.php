@@ -17,10 +17,12 @@ class PermissionSeeder extends Seeder
         $user = Role::create(['name' => 'user']);
         $admin = Role::create(['name' => 'admin']);
         $user_index = Permission::create(['name' => 'user.index']);
+        $user_delete = Permission::create(['name' => 'user.delete']);
         $me = Permission::create(['name' => 'me']);
         $profile_update = Permission::create(['name' => 'profile.update']);
-        $me->assignRole('admin','user');
-        $user_index->assignRole('admin');
-        $profile_update->assignRole('admin','user');
+        $me->assignRole($admin,$user);
+        $user_index->assignRole($admin);
+        $user_delete->assignRole($user,$admin);
+        $profile_update->assignRole($admin,$user);
     }
 }
