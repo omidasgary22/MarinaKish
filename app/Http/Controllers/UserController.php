@@ -36,9 +36,9 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request)
     {
         $user = new User();
-        $user->where('id', Auth::id())->update($request->toArray());
-        $updated = $user->where('id', Auth::id())->first();
-        return response()->json($updated);
+        $user = $user->find(Auth::id());
+        $user->update($request->toArray());
+        return response()->json($user);
     }
     public function index()
     {
@@ -76,14 +76,11 @@ class UserController extends Controller
         $new_password = $request->new_password;
         if(Auth::user())
         {
-            $password = $user->where('id',Auth::id())->first();
-            dd(Hash::check($password->password, $old_password));
-            if ('ddd' == 'sss') {
+            $user = $user->find(Auth::id());
+            if (!Hash::check($old_password, $user->password)) {
                 return response()->json('old password wrong');
             }
-            $password = $password->update(['password'=>$new_password])->where('id',Auth::id());
-
-            $user = $user->where('id',Auth::id())->first();
+            $user->update(['password' => Hash::make($new_password)]);
         }
         return response()->json($user);
     }
