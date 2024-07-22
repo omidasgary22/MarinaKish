@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('off_suggestion',['yes','no'])->default('no');
             $table->time('start_time');
             $table->time('end_time');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
