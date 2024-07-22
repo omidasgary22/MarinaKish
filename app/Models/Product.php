@@ -14,18 +14,29 @@ class Product extends Model
         'name',
         'price',
         'time',
+        'Discount percentage',
         'age_limited',
         'total',
         'pending',
-        'description'
+        'off_suggestion',
+        'description',
+        'started_at',
+        'ended_at',
+        'tip',
     ];
     protected $casts = [
         'name' => 'string',
-        'price' => 'bigint',
+        'price'=> 'biginteger',
+        'time' => 'integer',
+        'Discount percentage' => 'integer',
         'age_limited' => 'integer',
         'total' => 'integer',
         'pending' => 'integer',
-        'description' => 'text'
+        'off_suggestion' => 'string',
+        'description' => 'string',
+        'started_at' => 'datetime:H:i',
+        'ended_at' => 'datetime:H:i',
+        'tip' => 'string',
     ];
     public function orders():HasMany
     {
