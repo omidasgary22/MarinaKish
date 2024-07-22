@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('pending');
             $table->text('description');
             $table->text('tip');
-            $table->enum('off_suggestion',['yes','no']);
+            $table->enum('off_suggestion',['yes','no'])->default('no');
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
