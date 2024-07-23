@@ -16,14 +16,16 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('price');
             $table->integer('time');
+            $table->integer('Discount percentage')->nullable();
             $table->integer('age_limited');
             $table->integer('total');
             $table->integer('pending');
             $table->text('description');
             $table->text('tip');
-            $table->enum('off_suggestion',['yes','no']);
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->enum('off_suggestion',['yes','no'])->default('no');
+            $table->time('start_at');
+            $table->time('end_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
