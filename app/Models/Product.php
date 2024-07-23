@@ -16,7 +16,7 @@ class Product extends Model
         'time',
         'age_limited',
         'total',
-        'remaning',
+        'pending',
         'description'
     ];
     protected $casts = [
@@ -24,7 +24,7 @@ class Product extends Model
         'price' => 'bigint',
         'age_limited' => 'integer',
         'total' => 'integer',
-        'remaning' => 'integer',
+        'pending' => 'integer',
         'description' => 'text'
     ];
     public function orders():HasMany

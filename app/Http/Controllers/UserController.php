@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetpasswordRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,11 +20,12 @@ class UserController extends Controller
         $user = User::select('id', 'national_code', 'password')->where('national_code', $code)->first();
         if (!$user) {
             return response()->json('national_code wrong');
-        }if(!Hash::check($password ,$user->password)){
+        }
+        if (!Hash::check($password, $user->password)) {
             return response()->json('password wrong');
         }
         $token = $user->createToken($code)->plainTextToken;
-        return response()->json(['token'=>$token]);
+        return response()->json(['token' => $token]);
     }
     public function create(RegisterRequest $request)
     {
@@ -34,27 +36,52 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request)
     {
         $user = new User();
-        $user->where('id',Auth::id())->update($request->toArray());
-        $updated = $user->where('id',Auth::id())->first();
-        return response()->json($updated);
+        $user = $user->find(Auth::id());
+        $user->update($request->toArray());
+        return response()->json($user);
     }
     public function index()
     {
         $user = new User();
-        if (Auth::user()){
+        if (Auth::user()) {
             $user = $user->find(Auth::id());
             if ($user->hasRole('admin')) {
-                $users = $user->with('comments', 'orders','tickets')->orderBy('created_at', 'desc')->paginate(10);
+                $users = $user->with('comments', 'orders', 'tickets')->orderBy('created_at', 'desc')->paginate(10);
             }
         }
         return response()->json($users);
     }
     public function me()
     {
-        if (Auth::user()){
+        if (Auth::user()) {
             $user = new User();
-            $me = $user->with('comments', 'orders','tickets')->where('id',Auth::id())->first();
+            $me = $user->with('comments', 'orders', 'tickets')->where('id', Auth::id())->first();
         }
         return response()->json($me);
+    }
+
+    public function destroy()
+    {
+        if (Auth::user()) {
+            $user = new User();
+            $user = $user->findOrfail(Auth::id());
+            $user->delete();
+            return response()->json(['message' => 'کاربر با موفقیت حذف شد.']);
+        }
+    }
+    public function resetPassword(Request $request)
+    {
+        $user = new User();
+        $old_password = $request->old_password;
+        $new_password = $request->new_password;
+        if(Auth::user())
+        {
+            $user = $user->find(Auth::id());
+            if (!Hash::check($old_password, $user->password)) {
+                return response()->json('old password wrong');
+            }
+            $user->update(['password' => Hash::make($new_password)]);
+        }
+        return response()->json($user);
     }
 }
