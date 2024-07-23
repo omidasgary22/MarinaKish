@@ -26,3 +26,12 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
     Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
 });
+
+//ProductRoute
+Route::prefix('products')->group(function () {
+    Route::get('/index', [ProductController::class, 'index'])->name('products.index');
+    Route::post('/store', [ProductController::class, 'store'])->name('Products.store');
+    Route::put('/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::post('/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+});
