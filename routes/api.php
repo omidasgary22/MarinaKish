@@ -28,10 +28,10 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
 });
 
 //ProductRoute
-Route::prefix('products')->group(function () {
-    Route::get('/index', [ProductController::class, 'index'])->name('products.index');
-    Route::post('/store', [ProductController::class, 'store'])->name('Products.store');
-    Route::put('/update/{id}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::post('/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+Route::middleware('auth:sanctum')->prefix('products')->group(function () {
+    Route::get('index', )->name('products.index');
+    Route::post('store',)->name('Products.store');
+    Route::put('update/{id}',  'update')->name('products.update');
+    Route::delete('delete/{id}','destroy')->name('products.destroy');
+    Route::post('restore/{id}','restore')->name('products.restore');
 });
