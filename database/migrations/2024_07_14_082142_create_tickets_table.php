@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('body');
             $table->enum('status',['wating','answered']);
             $table->enum('priority',['Important','medium','low']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
