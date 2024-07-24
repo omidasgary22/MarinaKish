@@ -27,6 +27,11 @@ class UserController extends Controller
         $token = $user->createToken($code)->plainTextToken;
         return response()->json(['token' => $token]);
     }
+    public function logout()
+    {
+        $user = new User();
+        $user->tokens()->delete();
+    }
     public function create(RegisterRequest $request)
     {
         $user = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
