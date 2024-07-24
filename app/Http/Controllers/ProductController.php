@@ -30,15 +30,15 @@ class ProductController extends Controller
             return response()->json(['message' => 'محصول با موفقیت ایجاد شد', 'product' => $product]);
         }
     }
-    public function update($request, $id)
+    public function update(Request $request, $id)
     {
         $user = new User();
-        $user = find(Auth::id());
+        $user = $user->find(Auth::id());
         if ($user->hasRole('admin'))
         {
             $product = new Product();
             $product = $product->find($id);
-            $product->update($request->validated());
+            $product->update($request->toArray());
             return response()->json(['message' => 'محصول با موفقیت به روز رسانی شد', 'product' => $product]);
         }
     }
@@ -50,15 +50,15 @@ class ProductController extends Controller
         if ($user->hasRole('admin')) {
             $product = new Product();
             $product = $product->find($id);
-            $product->delete();
-            return response()->json(['محصول با موفقیت حذف شد ']);
+            $product->delete($id);
+            return response()->json(['message' => 'محصول با موفقیت حذف شد ']);
         }
     }
 
     public function restore($id)
     {
         $user = new User();
-        $user = find(Auth::id());
+        $user = $user->find(Auth::id());
         if ($user->hasRole('admin')) {
             $product = new Product();
             $product = $product->withTrashed()->find($id);
