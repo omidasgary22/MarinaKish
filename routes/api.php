@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
+Route::get('index/{?id}','index' )->name('index');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
@@ -28,7 +29,6 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
-    Route::get('index/{?id}','index' )->middleware('permission:product.index')->name('index');
     Route::post('store','store')->middleware('permission:product.create')->name('store');
     Route::put('update/{id}',  'upd.ate')->middleware('permission:product.update')->name('update');
     Route::delete('delete/{id}','destroy')->middleware('permission:product.delete')->name('destroy');
