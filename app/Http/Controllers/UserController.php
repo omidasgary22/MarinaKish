@@ -43,20 +43,16 @@ class UserController extends Controller
     public function index()
     {
         $user = new User();
-        if (Auth::user()) {
-            $user = $user->find(Auth::id());
-            if ($user->hasRole('admin')) {
-                $users = $user->with('comments', 'orders', 'tickets')->orderBy('created_at', 'desc')->paginate(10);
-            }
+        $user = $user->find(Auth::id());
+        if ($user->hasRole('admin')) {
+            $users = $user->with('comments', 'orders', 'tickets')->orderBy('created_at', 'desc')->paginate(10);
         }
         return response()->json($users);
     }
     public function me()
     {
-        if (Auth::user()) {
-            $user = new User();
-            $me = $user->with('comments', 'orders', 'tickets')->where('id', Auth::id())->first();
-        }
+        $user = new User();
+        $me = $user->with('comments', 'orders', 'tickets')->where('id', Auth::id())->first();
         return response()->json($me);
     }
 
@@ -74,14 +70,11 @@ class UserController extends Controller
         $user = new User();
         $old_password = $request->old_password;
         $new_password = $request->new_password;
-        if(Auth::user())
-        {
-            $user = $user->find(Auth::id());
-            if (!Hash::check($old_password, $user->password)) {
-                return response()->json('old password wrong');
-            }
-            $user->update(['password' => Hash::make($new_password)]);
+        $user = $user->find(Auth::id());
+        if (!Hash::check($old_password, $user->password)) {
+            return response()->json('old password wrong');
         }
+        $user->update(['password' => Hash::make($new_password)]);
         return response()->json($user);
     }
 }
