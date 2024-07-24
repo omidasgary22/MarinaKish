@@ -63,12 +63,9 @@ class UserController extends Controller
 
     public function destroy()
     {
-        if (Auth::user()) {
-            $user = new User();
-            $user = $user->findOrfail(Auth::id());
-            $user->delete();
-            return response()->json(['message' => 'کاربر با موفقیت حذف شد.']);
-        }
+        $user = new User();
+        $user = $user->findOrfail(Auth::id());$user->delete();
+        return response()->json(['message' => 'کاربر با موفقیت حذف شد.']);
     }
     public function resetPassword(Request $request)
     {
