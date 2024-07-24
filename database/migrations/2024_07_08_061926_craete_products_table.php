@@ -24,8 +24,8 @@ return new class extends Migration
             $table->text('tip');
             $table->enum('off_suggestion',['yes','no'])->default('no');
             $table->enum('marina_suggestion',['yes','no'])->default('no');
-            $table->time('start_at');
-            $table->time('end_at');
+            $table->time('started_at');
+            $table->time('ended_at');
             $table->softDeletes();
             $table->timestamps();
         });
