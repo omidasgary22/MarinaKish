@@ -26,12 +26,10 @@ class PermissionSeeder extends Seeder
         $reset_password = Permission::create(['name' => 'reset.password']);
         $profile_update->assignRole($admin,$user);
         $reset_password->assignRole($admin,$user);
-        $product_index = Permission::create(['name' => 'product.index']);
         $product_create = Permission::create(['name' => 'product.create']);
         $product_update = Permission::create(['name' => 'product.update']);
         $product_delete = Permission::create(['name' => 'product.delete']);
         $product_restore = Permission::create(['name' => 'product.restore']);
-        $product_index->assignRole($admin,$user);
         $product_update->assignRole($admin);
         $product_delete->assignRole($admin);
         $product_create->assignRole($admin);
