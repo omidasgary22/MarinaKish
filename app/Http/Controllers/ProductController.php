@@ -14,10 +14,11 @@ class ProductController extends Controller
     public function index($id = null)
     {
         $products = new Product();
-        if (!$id) {
-            $products = Product::all();
+        if ($id) {
+            $products = $products->find($id);
+        }else {
+            $products = $products->orderBy('id', 'desc')->paginate(10);
         }
-        $products = $products->find($id);
         return response()->json($products);
     }
     public function store(StoreProductRequest $request)
