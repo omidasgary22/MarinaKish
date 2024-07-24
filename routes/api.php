@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
-Route::get('index/{?id}','index' )->name('index');
+Route::get('index/{?id}',[ProductController::class ,'index'] )->name('index');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
