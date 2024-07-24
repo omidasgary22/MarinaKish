@@ -18,4 +18,10 @@ class TicketController extends Controller
         $ticket = Ticket::create($request->all());
         return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket], 201);
     }
+
+    public function show($id)
+    {
+        $ticket = Ticket::with('user')->findOrfail($id);
+        return response()->json(['ticket' => $ticket], 200);
+    }
 }
