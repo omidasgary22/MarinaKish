@@ -34,12 +34,12 @@ class Product extends Model
         'age_limited' => 'integer',
         'total' => 'integer',
         'pending' => 'integer',
-        'off_suggestion' => 'enum',
-        'description' => 'text',
+        'off_suggestion' => 'string',
+        'description' => 'string',
         'started_at' => 'datetime:H:i',
         'ended_at' => 'datetime:H:i',
-        'tip' => 'text',
-        'marina_suggestion' => 'enum',
+        'tip' => 'string',
+        'marina_suggestion' => 'string',
     ];
     public function orders():HasMany
     {
