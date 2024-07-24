@@ -28,6 +28,7 @@ return new class extends Migration
             $table->time('ended_at');
             $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
