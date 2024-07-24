@@ -24,13 +24,13 @@ Route::get('index/{?id}',[ProductController::class ,'index'] )->name('product.in
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
     Route::get('ME', 'me')->middleware('permission:me')->name('dashboard');
-    Route::post('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
+    Route::put('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
     Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
     Route::post('store','store')->middleware('permission:product.create')->name('store');
-    Route::put('update/{id}',  'upd.ate')->middleware('permission:product.update')->name('update');
+    Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
     Route::delete('delete/{id}','destroy')->middleware('permission:product.delete')->name('destroy');
     Route::post('restore/{id}','restore')->middleware('permission:product.restore')->name('restore');
 });
