@@ -12,4 +12,10 @@ class TicketController extends Controller
         $tickets = Ticket::all();
         return response()->json(['tickets' => $tickets], 200);
     }
+
+    public function store($request)
+    {
+        $ticket = Ticket::create($request->all());
+        return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket], 201);
+    }
 }
