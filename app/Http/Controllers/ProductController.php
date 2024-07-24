@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Role;
 
 class ProductController extends Controller
 {
-    public function index($id)
+    public function index($id = null)
     {
         $products = new Product();
         if (!$id) {
