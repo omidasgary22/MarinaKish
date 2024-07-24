@@ -15,7 +15,7 @@ class Product extends Model
         'name',
         'price',
         'time',
-        'Discount percentage',
+        'off_percent',
         'age_limited',
         'total',
         'pending',
@@ -24,20 +24,22 @@ class Product extends Model
         'started_at',
         'ended_at',
         'tip',
+        'marina_suggestion'
     ];
     protected $casts = [
         'name' => 'string',
         'price'=> 'integer',
         'time' => 'integer',
-        'Discount percentage' => 'integer',
+        'off_percent' => 'integer',
         'age_limited' => 'integer',
         'total' => 'integer',
         'pending' => 'integer',
-        'off_suggestion' => 'string',
-        'description' => 'string',
+        'off_suggestion' => 'enum',
+        'description' => 'text',
         'started_at' => 'datetime:H:i',
         'ended_at' => 'datetime:H:i',
-        'tip' => 'string',
+        'tip' => 'text',
+        'marina_suggestion' => 'enum',
     ];
     public function orders():HasMany
     {
