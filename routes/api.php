@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,12 +27,10 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
     Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
 });
-
-//ProductRoute
-Route::middleware('auth:sanctum')->prefix('products')->group(function () {
-    Route::get('index', )->name('products.index');
-    Route::post('store',)->name('Products.store');
-    Route::put('update/{id}',  'update')->name('products.update');
-    Route::delete('delete/{id}','destroy')->name('products.destroy');
-    Route::post('restore/{id}','restore')->name('products.restore');
+Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
+    Route::get('index/{?id}','index' )->middleware('permission:product.index')->name('index');
+    Route::post('store','store')->middleware('permission:product.create')->name('store');
+    Route::put('update/{id}',  'upd.ate')->middleware('permission:product.update')->name('update');
+    Route::delete('delete/{id}','destroy')->middleware('permission:product.delete')->name('destroy');
+    Route::post('restore/{id}','restore')->middleware('permission:product.restore')->name('restore');
 });
