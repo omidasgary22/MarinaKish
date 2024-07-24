@@ -26,7 +26,7 @@ class Product extends Model
     ];
     protected $casts = [
         'name' => 'string',
-        'price'=> 'biginteger',
+        'price'=> 'integer',
         'time' => 'integer',
         'Discount percentage' => 'integer',
         'age_limited' => 'integer',
