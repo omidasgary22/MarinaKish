@@ -25,4 +25,13 @@ class UpdateRulesRequest extends FormRequest
             'body' => 'required|string',
         ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'body.required' => 'فیلد بدنه اجباری است.',
+            'body.string' => 'فیلد بدنه باید از نوع رشته باشد.',
+        ];
+    }
 }
