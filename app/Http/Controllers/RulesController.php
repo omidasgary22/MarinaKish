@@ -18,4 +18,11 @@ class RulesController extends Controller
         $rule = Rules::create($request->all());
         return response()->json(['message' => 'قانون با موفقیت ایجاد شد', 'rule' => $rule], 201);
     }
+
+    public function update(Request $request, $id)
+    {
+        $rule = Rules::findOrFail($id);
+        $rule->update($request->all());
+        return response()->json(['message' => 'قانون با موفیقیت به روز رسانی شد', 'rule' => $rule]);
+    }
 }
