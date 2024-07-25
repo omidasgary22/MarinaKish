@@ -12,4 +12,10 @@ class RulesController extends Controller
         $rules = Rules::all();
         return response()->json(['rules' => 'rules']);
     }
+
+    public function store(Request $request)
+    {
+        $rule = Rules::create($request->all());
+        return response()->json(['message' => 'قانون با موفقیت ایجاد شد', 'rule' => $rule], 201);
+    }
 }
