@@ -25,4 +25,11 @@ class RulesController extends Controller
         $rule->update($request->all());
         return response()->json(['message' => 'قانون با موفیقیت به روز رسانی شد', 'rule' => $rule]);
     }
+
+    public function destroy($id)
+    {
+        $rule = Rules::findOrFail($id);
+        $rule->delete($id);
+        return response()->json(['message' => 'قانون با موفقیت حذف شد']);
+    }
 }
