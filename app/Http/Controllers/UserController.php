@@ -75,8 +75,7 @@ class UserController extends Controller
         if(Auth::user())
         {
             $password = $user->where('id',Auth::id())->first();
-            dd(Hash::check($password->password, $old_password));
-            if ('ddd' == 'sss') {
+            if (!Hash::check($password->password, $old_password)) {
                 return response()->json('old password wrong');
             }
             $password = $password->update(['password'=>$new_password])->where('id',Auth::id());
