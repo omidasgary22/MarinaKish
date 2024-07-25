@@ -14,11 +14,11 @@ class Passenger extends Model
             'name',
             'national_code',
             'gender',
-            'berth_day',
+            'birth_day',
             'phone',
         ];
     protected $casts = [
-        'berth_day' => 'date',
+        'birth_day' => 'date',
         'name' => 'string',
         'national_code' => 'string',
         'gender' => 'string',
