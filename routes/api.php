@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -46,4 +47,13 @@ Route::prefix('tickets')->group(function () {
     Route::put('/update/{id}', [TicketController::class, 'update'])->name('tickets.update');
     Route::delete('/delete/{id}', [TicketController::class, 'destroy'])->name('tikets.destroy');
     Route::post('/restore/{id}', [TicketController::class, 'restore'])->name('tickets.restore');
+});
+
+//RuleRoute
+Route::prefix('rules')->group(function () {
+    Route::get('/index/{id?}', [RulesController::class, 'index'])->name('rules.index');
+    Route::post('/store', [RulesController::class, 'store'])->name('rules.store');
+    Route::put('/update/{id}', [RulesController::class, 'update'])->name('rules.update');
+    Route::delete('/delete/{id}', [RulesController::class, 'destroy'])->name('rules.destroy');
+    Route::post('/restore/{id}', [RulesController::class, 'restore'])->name('rules.restore');
 });
