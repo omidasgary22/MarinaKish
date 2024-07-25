@@ -34,8 +34,17 @@ class UserController extends Controller
     }
     public function create(RegisterRequest $request)
     {
-        $user = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
-        $user->assignRole('user');
+        $user = new User();
+        $phone = $request->phone;
+        $user = $user->onlyTrashed()->where('phone',$phone)->first();
+        if ($user)
+        {
+            $user->onlyTrashed()->restore();
+            $user->update($request->all());
+        }else {
+            $user = $user->create($request->toArray());
+            $user->assignRole('user');
+        }
         return response()->json($user);
     }
     public function update(UserUpdateRequest $request)
