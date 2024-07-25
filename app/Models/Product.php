@@ -6,26 +6,40 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory ,SoftDeletes;
     protected $fillable = [
         'name',
         'price',
         'time',
+        'off_percent',
         'age_limited',
         'total',
         'pending',
-        'description'
+        'off_suggestion',
+        'description',
+        'started_at',
+        'ended_at',
+        'tip',
+        'marina_suggestion'
     ];
     protected $casts = [
         'name' => 'string',
-        'price' => 'bigint',
+        'price'=> 'integer',
+        'time' => 'integer',
+        'off_percent' => 'integer',
         'age_limited' => 'integer',
         'total' => 'integer',
         'pending' => 'integer',
-        'description' => 'text'
+        'off_suggestion' => 'string',
+        'description' => 'string',
+        'started_at' => 'datetime:H:i',
+        'ended_at' => 'datetime:H:i',
+        'tip' => 'string',
+        'marina_suggestion' => 'string',
     ];
     public function orders():HasMany
     {

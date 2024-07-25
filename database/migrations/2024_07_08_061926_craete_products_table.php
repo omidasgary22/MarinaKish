@@ -16,15 +16,19 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('price');
             $table->integer('time');
+            $table->integer('off_percent')->nullable();
             $table->integer('age_limited');
             $table->integer('total');
             $table->integer('pending');
             $table->text('description');
             $table->text('tip');
-            $table->enum('off_suggestion',['yes','no']);
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->enum('off_suggestion',['yes','no'])->default('no');
+            $table->enum('marina_suggestion',['yes','no'])->default('no');
+            $table->time('started_at');
+            $table->time('ended_at');
+            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
