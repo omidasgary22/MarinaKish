@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::get('ME', 'me')->middleware('permission:me')->name('dashboard');
     Route::post('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
-    Route::post('reset_password','resetPassword')->name('reset_password');
+    Route::post('reset_password', 'resetPassword')->name('reset_password');
 });
 
 //ProductRoute
@@ -35,4 +36,14 @@ Route::prefix('products')->group(function () {
     Route::put('/update/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::post('/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+});
+
+//TicketRoute
+Route::prefix('tickets')->group(function () {
+    Route::get('/index', [TicketController::class, 'index'])->name('tickets.index');
+    Route::post('/store', [TicketController::class, 'store'])->name('tickets.store');
+    Route::get('/show/{id}', [TicketController::class, 'show'])->name('tickets.show');
+    Route::put('/update/{id}', [TicketController::class, 'update'])->name('tickets.update');
+    Route::delete('/delete/{id}', [TicketController::class, 'destroy'])->name('tikets.destroy');
+    Route::post('/restore/{id}', [TicketController::class, 'restore'])->name('tickets.restore');
 });
