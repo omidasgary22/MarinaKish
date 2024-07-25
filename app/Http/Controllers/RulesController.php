@@ -32,4 +32,11 @@ class RulesController extends Controller
         $rule->delete($id);
         return response()->json(['message' => 'قانون با موفقیت حذف شد']);
     }
+
+    public function restore($id)
+    {
+        $user = Rules::onlyTrashed()->findOrFail($id);
+        $user->restore();
+        return response()->json(['message' => 'قانون مورد نظر  با موفقیت بازیابی شد.'], 200);
+    }
 }
