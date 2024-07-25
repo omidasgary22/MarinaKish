@@ -72,16 +72,12 @@ class UserController extends Controller
         $user = new User();
         $old_password = $request->old_password;
         $new_password = $request->new_password;
-        if(Auth::user())
-        {
             $password = $user->where('id',Auth::id())->first();
             if (!Hash::check($password->password, $old_password)) {
                 return response()->json('old password wrong');
             }
             $password = $password->update(['password'=>$new_password])->where('id',Auth::id());
-
             $user = $user->where('id',Auth::id())->first();
-        }
         $user->update(['password' => Hash::make($new_password)]);
         return response()->json($user);
     }
