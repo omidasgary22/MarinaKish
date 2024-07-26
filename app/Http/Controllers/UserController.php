@@ -42,7 +42,7 @@ class UserController extends Controller
             $user->onlyTrashed()->restore();
             $user->update($request->all());
         }else {
-            $user = $user->create($request->toArray());
+            $user = User::create($request->toArray());
             $user->assignRole('user');
         }
         return response()->json($user);
