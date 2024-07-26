@@ -68,8 +68,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class);
     }
-    public function users():BelongsToMany
+    public function passengers():HasMany
     {
-        return $this->belongsToMany(User::class,'passengers_users','user_id','passenger_id');
+        return $this->hasMany(Passenger::class);
     }
 }
