@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('national_code');
             $table->string('phone');
             $table->date('birth_day');
             $table->enum('gender', ['male', 'female']);
+            $table->unique(['user_id','phone']);
             $table->timestamps();
         });
     }
