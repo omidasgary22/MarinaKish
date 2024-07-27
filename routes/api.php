@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -39,4 +40,7 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
     Route::get('index', 'index')->name('index');
     Route::post('store','store')->name('store');
+});
+Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function (){
+    Route::post('save_image/{model}/{id?}','save_image')->name('save');
 });
