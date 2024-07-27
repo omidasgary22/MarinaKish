@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->text('summary');    //توضیح مختصر
+            $table->text('content');    //جزییات مطالب
+            $table->integer('duration_of_study');    //مدت زمان مطالعه
+            $table->softDeletes();
             $table->timestamps();
         });
     }
