@@ -10,7 +10,9 @@ class Blog extends Model
     use HasFactory;
     protected $fillable = [
         'title',
+        'summary',
         'content',
+        'duration_of_study'
     ];
     protected $casts = [
         'title' => 'string',
