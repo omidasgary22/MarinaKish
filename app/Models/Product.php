@@ -12,7 +12,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory ,SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
+
     protected $fillable = [
         'name',
         'price',
@@ -30,7 +31,7 @@ class Product extends Model implements HasMedia
     ];
     protected $casts = [
         'name' => 'string',
-        'price'=> 'integer',
+        'price' => 'integer',
         'time' => 'integer',
         'off_percent' => 'integer',
         'age_limited' => 'integer',
@@ -43,16 +44,24 @@ class Product extends Model implements HasMedia
         'tip' => 'string',
         'marina_suggestion' => 'string',
     ];
-    public function orders():HasMany
+
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
-    public function comments():HasMany
+
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
-    public function labels():MorphToMany
+
+    public function labels(): MorphToMany
     {
         return $this->morphToMany(Label::class, 'labelable');
+    }
+
+    public function sans(): HasMany
+    {
+        return $this->hasMany(Sans::class);
     }
 }
