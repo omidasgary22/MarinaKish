@@ -55,16 +55,4 @@ class ProductController extends Controller
             return response()->json(['message' => 'محصول با موفقیت حذف شد ']);
         }
     }
-
-    public function restore($id)
-    {
-        $user = new User();
-        $user = $user->find(Auth::id());
-        if ($user->hasRole('admin')) {
-            $product = new Product();
-            $product = $product->withTrashed()->find($id);
-            $product->restore();
-            return response()->json(['message' => ' محصول با موفقیت بازگردانده شد ', 'product' => $product]);
-        }
-    }
 }
