@@ -14,16 +14,20 @@ class Order extends Model
     protected $fillable =[
         'user_id',
         'status',
+        'product_id',
+        'number',
         'beath',
         'passenger_id',
         'factor_id'
     ];
     protected $casts =[
         'user_id'=> 'integer',
+        'product_id'=> 'integer',
         'status'=>'enum',
         'beath'=>'datetime',
         'factor_id'=>'integer',
-        'passenger_id'=>'integer'
+        'passenger_id'=>'array',
+        'number'=>'integer'
     ];
     public function user():BelongsTo
     {

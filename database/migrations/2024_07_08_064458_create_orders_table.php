@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('product_id');
-            $table->integer('passenger_id');
-            $table->unique(['user_id','passenger_id']);
+            $table->integer('passenger_id')->nullable();
+            $table->unsignedBigInteger('factor_id');
+            $table->unique(['user_id','passenger_id','factor_id']);
+            $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation']);
             $table->dateTime('beath');
             $table->timestamps();
