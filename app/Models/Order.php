@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -41,9 +42,9 @@ class Order extends Model
     {
         return $this->hasOne(Factor::class);
     }
-    public function passengers():HasMany
+    public function passengers():BelongsToMany
     {
-        return $this->hasMany(Passenger::class);
+        return $this->belongsToMany(Passenger::class,'order_passenger','order_id','passenger_id');
     }
 
 }

@@ -29,4 +29,8 @@ class Passenger extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function orders():BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'orders_passengers', 'passenger_id', 'order_id');
+    }
 }
