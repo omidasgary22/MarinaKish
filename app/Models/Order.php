@@ -15,13 +15,15 @@ class Order extends Model
         'user_id',
         'status',
         'beath',
+        'passenger_id',
         'factor_id'
     ];
     protected $casts =[
         'user_id'=> 'integer',
         'status'=>'enum',
         'beath'=>'datetime',
-        'factor_id'=>'integer'
+        'factor_id'=>'integer',
+        'passenger_id'=>'integer'
     ];
     public function user():BelongsTo
     {
@@ -35,7 +37,10 @@ class Order extends Model
     {
         return $this->hasOne(Factor::class);
     }
-
+    public function passengers():HasMany
+    {
+        return $this->hasMany(Passenger::class);
+    }
 
 }
 
