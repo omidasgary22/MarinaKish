@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -34,4 +35,7 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
     Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
     Route::delete('delete/{id}','destroy')->middleware('permission:product.delete')->name('destroy');
     Route::post('restore/{id}','restore')->middleware('permission:product.restore')->name('restore');
+});
+Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
+    Route::get('index', 'index')->middleware('permission:order.index')->name('index');
 });
