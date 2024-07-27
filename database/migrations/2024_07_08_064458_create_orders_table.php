@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unique(['user_id','product_id','factor_id']);
             $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation']);
-            $table->dateTime('beath');
+            $table->dateTime('sans');
             $table->timestamps();
         });
     }
