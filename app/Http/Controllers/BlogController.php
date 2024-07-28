@@ -24,4 +24,11 @@ class BlogController extends Controller
         $blog = Blog::findOrFaill($id);
         return response()->json(['blog' => $blog]);
     }
+
+    public function update($request, $id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->update($request->all());
+        return response()->json(['message' => 'بلاگ با موفقیت به روز رسانی شد', 'blog' => $blog]);
+    }
 }
