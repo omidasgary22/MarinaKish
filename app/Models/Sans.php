@@ -19,7 +19,7 @@ class Sans extends Model
         ];
     protected $casts =
         [
-            'start_time' => 'time',
+            'start_time' => 'string',
             'remaining' => 'integer',
             'product_id' => 'integer'
         ];
