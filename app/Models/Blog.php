@@ -16,6 +16,11 @@ class Blog extends Model
     ];
     protected $casts = [
         'title' => 'string',
-        'content' => 'text'
+        'summary' => 'string',
+        'content' => 'string',
+        'duration_of_study' => 'integer',
+        'deleted_at' => 'datetime',
+        'craeted_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
