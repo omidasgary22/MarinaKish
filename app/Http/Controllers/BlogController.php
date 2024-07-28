@@ -12,4 +12,10 @@ class BlogController extends Controller
         $blogs = Blog::all();
         return response()->json(['blogs' => $blogs]);
     }
+
+    public function store($request)
+    {
+        $blog = Blog::create($request->all());
+        return response()->json(['message' => 'بلاک با موفقیت ایجاد شد', 'blog' => $blog], 201);
+    }
 }
