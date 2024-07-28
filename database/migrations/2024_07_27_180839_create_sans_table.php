@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beaths', function (Blueprint $table) {
+        Schema::create('sans', function (Blueprint $table) {
             $table->id();
+            $table->time('start_time');
+            $table->integer('remaining');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('beaths');
+        Schema::dropIfExists('sans');
     }
 };
