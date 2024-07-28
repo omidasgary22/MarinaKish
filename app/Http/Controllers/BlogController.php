@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class BlogController extends Controller
         return response()->json(['blog' => $blog]);
     }
 
-    public function update($request, $id)
+    public function update( UpdateBlogRequest $request, $id)
     {
         $blog = Blog::findOrFail($id);
         $blog->update($request->all());
