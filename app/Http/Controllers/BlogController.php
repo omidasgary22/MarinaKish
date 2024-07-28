@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class BlogController extends Controller
         return response()->json(['blogs' => $blogs]);
     }
 
-    public function store($request)
+    public function store( StoreBlogRequest $request)
     {
         $blog = Blog::create($request->all());
         return response()->json(['message' => 'بلاک با موفقیت ایجاد شد', 'blog' => $blog], 201);
