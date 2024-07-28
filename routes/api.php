@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
@@ -57,3 +58,14 @@ Route::prefix('rules')->group(function () {
     Route::delete('/delete/{id}', [RulesController::class, 'destroy'])->name('rules.destroy');
     Route::post('/restore/{id}', [RulesController::class, 'restore'])->name('rules.restore');
 });
+
+//BlogRoute
+Route::prefix('blogs')->group(function () {
+    Route::get('/index', [BlogController::class, 'index'])->name('blogs.index');
+    Route::post('/store', [BlogController::class, 'store'])->name('blogs.store');
+    Route::get('/show/{id}', [BlogController::class, 'show'])->name('blogs.show');
+    Route::put('/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
+    Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+    Route::post('/restore/{id}', [BlogController::class, 'restore'])->name('blogs.restore');
+});
+
