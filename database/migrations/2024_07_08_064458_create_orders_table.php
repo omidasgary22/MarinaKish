@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('factor_id');
             $table->unique(['user_id','product_id','factor_id']);
             $table->integer('number');
-            $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation']);
-            $table->dateTime('sans');
+            $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation'])->default('payment');
+            $table->dateTime('sans_id');
             $table->timestamps();
         });
     }

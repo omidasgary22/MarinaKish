@@ -12,40 +12,44 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
         'user_id',
         'status',
         'product_id',
         'number',
         'beath',
         'passenger_id',
-        'factor_id'
+        'factor_id',
+        'sans_id'
     ];
-    protected $casts =[
-        'user_id'=> 'integer',
-        'product_id'=> 'integer',
-        'status'=>'enum',
-        'beath'=>'datetime',
-        'factor_id'=>'integer',
-        'passenger_id'=>'array',
-        'number'=>'integer'
+    protected $casts = [
+        'user_id' => 'integer',
+        'product_id' => 'integer',
+        'status' => 'enum',
+        'beath' => 'datetime',
+        'factor_id' => 'integer',
+        'passenger_id' => 'array',
+        'number' => 'integer',
+        'sans_id'=>'integer'
     ];
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function product():BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
-    public function factor():HasOne
+    public function factor(): HasOne
     {
         return $this->hasOne(Factor::class);
     }
-    public function passengers():BelongsToMany
+    public function passengers(): BelongsToMany
     {
-        return $this->belongsToMany(Passenger::class,'order_passenger','order_id','passenger_id');
+        return $this->belongsToMany(Passenger::class, 'order_passenger', 'order_id', 'passenger_id');
     }
-
+    public function sans(): BelongsTo
+    {
+        return $this->belongsTo(Sans::class);
+    }
 }
-
