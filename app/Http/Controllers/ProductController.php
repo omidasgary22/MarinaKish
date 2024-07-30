@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SansProcessed;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Sans;
@@ -30,20 +31,13 @@ class ProductController extends Controller
         $time = $request->time;
         $pending = $request->pending;
         $total = $request->total;
-        $started_at = Carbon::parse($request->started_at);
+        $start_time = Carbon::parse($request->started_at);
         $ended_at = Carbon::parse($request->ended_at);
         if ($user->hasRole('admin')) {
             $product = new Product();
             $product = $product->create($request->toArray());
             $id = $product->id;
-            while ($started_at->lessThan($ended_at)) {
-                Sans::create([
-                    'product_id' => $id,
-                    'start_time' => $started_at->toTimeString(),
-                    'remaining' => $total,
-                ]);
-                $started_at->addMinute($pending + $time);
-            }
+            SansController::store($time, $pending, $total, $start_time, $ended_at, $id);
             $product = Product::with('sans')->find($id);
             return response()->json(['message' => 'محصول با موفقیت ایجاد شد', 'product' => $product]);
         }
