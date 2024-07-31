@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->time('start_time');
             $table->integer('remaining');
+            $table->string('day_of_week');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
         });
