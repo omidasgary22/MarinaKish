@@ -20,7 +20,8 @@ class Order extends Model
         'beath',
         'passenger_id',
         'factor_id',
-        'sans_id'
+        'sans_id',
+        'day_reserved'
     ];
     protected $casts = [
         'user_id' => 'integer',
@@ -30,7 +31,8 @@ class Order extends Model
         'factor_id' => 'integer',
         'passenger_id' => 'array',
         'number' => 'integer',
-        'sans_id'=>'integer'
+        'sans_id'=>'integer',
+        'day_reserved' => 'date'
     ];
     public function user(): BelongsTo
     {

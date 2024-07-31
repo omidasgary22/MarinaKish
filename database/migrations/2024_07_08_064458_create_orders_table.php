@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation'])->default('payment');
             $table->dateTime('sans_id');
+            $table->date('day_reserved');
             $table->timestamps();
         });
     }
