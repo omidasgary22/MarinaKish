@@ -16,14 +16,12 @@ class Sans extends Model
             'start_time',
             'remaining',
             'product_id',
-            'day_of_week'
         ];
     protected $casts =
         [
             'start_time' => 'string',
             'remaining' => 'integer',
             'product_id' => 'integer',
-            'day_of_week'=> 'string'
         ];
     public function product(): BelongsTo
     {

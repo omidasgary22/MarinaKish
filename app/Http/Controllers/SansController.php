@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class SansController extends Controller
 {
-    static function store($time,$pending,$total,$start_time,$ended_at,$id)
+    static function store($time, $pending, $total, $start_time, $ended_at, $id)
     {
         while ($start_time->lessThan($ended_at)) {
             Sans::create([
