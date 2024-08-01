@@ -18,4 +18,12 @@ class QuestionController extends Controller
         $faq = Question::create($request->toArray());
         return response()->json(['message' => 'سوال با موفقیت ایجاد شد', 'faq' => $faq], 201);
     }
+
+    public function update(UpdateFAQRequest $request, $id)
+    {
+        $faq = Question::findorFail($id);
+        $faq->update($request->toArray());
+        return response()->json(['message' => 'سوال با موفقیت به روز رسانی شد.'], 200);
+    }
+
 }
