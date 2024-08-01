@@ -14,6 +14,7 @@ class Comment extends Model
         'product_id',
         'title',
         'body',
+        'answer',
         'star',
         'status'
     ];
