@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MediaController;
@@ -77,5 +78,15 @@ Route::prefix('blogs')->group(function () {
     Route::put('/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
     Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
     Route::post('/restore/{id}', [BlogController::class, 'restore'])->name('blogs.restore');
+});
+
+//CommentRoute
+Route::prefix('comments')->group(function () {
+    Route::get('/index{id?}', [CommentController::class, 'index'])->name('comments.index');
+    Route::post('/store', [CommentController::class, 'store'])->name('comments.store');
+    Route::put('/update/{id}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/delete/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::post('/restore/{id}', [CommentController::class, 'restore'])->name('comments.restore');
+    Route::get('/show/{id}', [CommentController::class, 'show'])->name('comments.show');
 });
 
