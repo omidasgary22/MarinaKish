@@ -18,4 +18,11 @@ class CommentController extends Controller
         $comment = Comment::create($request->toArray());
         return response()->json(['message' => 'نظر با موفقیت ایجاد شد', 'comment' => $comment], 201);
     }
+
+    public function update(CommentRequest $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->update($request->toArray());
+        return response()->json(['message' => 'نظر با موفقیت به روز رسانی شد', 'comment' => $comment]);
+    }
 }
