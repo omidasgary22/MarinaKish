@@ -1,15 +1,11 @@
 <?php
 
-<<<<<<< HEAD
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
-=======
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
->>>>>>> f52923cfd06c9f55c85f9d0725db4beb2976cde0
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,11 +32,9 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::get('ME', 'me')->middleware('permission:me')->name('dashboard');
     Route::put('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
-<<<<<<< HEAD
+
     Route::post('reset_password', 'resetPassword')->name('reset_password');
-=======
     Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
->>>>>>> f52923cfd06c9f55c85f9d0725db4beb2976cde0
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
     Route::post('store','store')->middleware('permission:product.create')->name('store');
