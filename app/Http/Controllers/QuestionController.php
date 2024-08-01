@@ -33,4 +33,11 @@ class QuestionController extends Controller
         return response()->json(['message' => 'سوال با موفقیت حذف شد.'], 200);
     }
 
+    public function restore($id)
+    {
+        $faq = Question::onlyTrashed()->findOrFail($id);
+        $faq->restore();
+        return response()->json(['message' => 'سوال با موفقیت بازیابی شد.'],200);
+    }
+
 }
