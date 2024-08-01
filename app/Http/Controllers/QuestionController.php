@@ -26,4 +26,11 @@ class QuestionController extends Controller
         return response()->json(['message' => 'سوال با موفقیت به روز رسانی شد.'], 200);
     }
 
+    public function destroy($id)
+    {
+        $faq = Question::findOrFail($id);
+        $faq->delete();
+        return response()->json(['message' => 'سوال با موفقیت حذف شد.'], 200);
+    }
+
 }
