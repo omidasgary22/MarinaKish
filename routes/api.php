@@ -7,6 +7,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
-Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('product.index');
+Route::get('products/index/{id?}', [ProductController::class, 'index'])->name('product.index');
 Route::delete('logout', [UserController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
@@ -35,20 +36,20 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
 
     Route::post('reset_password', 'resetPassword')->name('reset_password');
-    Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
+    Route::post('reset_password', 'resetPassword')->middleware('permission:reset.password')->name('reset_password');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
-    Route::post('store','store')->middleware('permission:product.create')->name('store');
+    Route::post('store', 'store')->middleware('permission:product.create')->name('store');
     Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
-    Route::delete('delete/{id}','destroy')->middleware('permission:product.delete')->name('destroy');
-    Route::post('restore/{id}','restore')->middleware('permission:product.restore')->name('restore');
+    Route::delete('delete/{id}', 'destroy')->middleware('permission:product.delete')->name('destroy');
+    Route::post('restore/{id}', 'restore')->middleware('permission:product.restore')->name('restore');
 });
-Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
+Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function () {
     Route::get('index', 'index')->name('index');
-    Route::post('store','store')->name('store');
+    Route::post('store', 'store')->name('store');
 });
-Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function (){
-    Route::post('save_image/{model}/{id?}','save_image')->name('save');
+Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function () {
+    Route::post('save_image/{model}/{id?}', 'save_image')->name('save');
 });
 
 //TicketRoute
@@ -90,3 +91,11 @@ Route::prefix('comments')->group(function () {
     Route::get('/show/{id}', [CommentController::class, 'show'])->name('comments.show');
 });
 
+//FAQRoute
+Route::prefix('faqs')->group(function () {
+    Route::get('/index/{id?}', [QuestionController::class, 'index'])->name('faqs.index');
+    Route::post('/store', [QuestionController::class, 'store'])->name('faqs.store');
+    Route::put('/update/{id}', [QuestionController::class, 'update'])->name('faqs.update');
+    Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('faqs.destroy');
+    Route::post('/restore/{id}', [QuestionController::class, 'restore'])->name('faqs.restore');
+});
