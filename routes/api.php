@@ -1,9 +1,15 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
+=======
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+>>>>>>> f52923cfd06c9f55c85f9d0725db4beb2976cde0
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,22 +28,32 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
+Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('product.index');
+Route::delete('logout', [UserController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
     Route::get('ME', 'me')->middleware('permission:me')->name('dashboard');
-    Route::post('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
+    Route::put('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
+<<<<<<< HEAD
     Route::post('reset_password', 'resetPassword')->name('reset_password');
+=======
+    Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
+>>>>>>> f52923cfd06c9f55c85f9d0725db4beb2976cde0
 });
-
-//ProductRoute
-Route::prefix('products')->group(function () {
-    Route::get('/index', [ProductController::class, 'index'])->name('products.index');
-    Route::post('/store', [ProductController::class, 'store'])->name('Products.store');
-    Route::put('/update/{id}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::post('/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
+    Route::post('store','store')->middleware('permission:product.create')->name('store');
+    Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
+    Route::delete('delete/{id}','destroy')->middleware('permission:product.delete')->name('destroy');
+    Route::post('restore/{id}','restore')->middleware('permission:product.restore')->name('restore');
+});
+Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
+    Route::get('index', 'index')->name('index');
+    Route::post('store','store')->name('store');
+});
+Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function (){
+    Route::post('save_image/{model}/{id?}','save_image')->name('save');
 });
 
 //TicketRoute
