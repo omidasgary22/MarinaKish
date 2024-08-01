@@ -12,4 +12,10 @@ class QuestionController extends Controller
         $faqs = Question::all();
         return response()->json(['faqs' => $faqs]);
     }
+
+    public  function store(StoreFAQRequest $request)
+    {
+        $faq = Question::create($request->toArray());
+        return response()->json(['message' => 'سوال با موفقیت ایجاد شد', 'faq' => $faq], 201);
+    }
 }
