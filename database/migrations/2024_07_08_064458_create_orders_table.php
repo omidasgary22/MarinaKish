@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('product_id');
-            $table->unsignedBigInteger('factor_id');
-            $table->unique(['user_id','product_id','factor_id']);
+            $table->unsignedBigInteger('factor_id')->nullable();
+            $table->unique(['user_id','product_id']);
             $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation'])->default('payment');
             $table->dateTime('sans_id');
