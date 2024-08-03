@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unique(['user_id','product_id']);
             $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation'])->default('payment');
-            $table->dateTime('sans_id');
+            $table->integer('sans_id');
             $table->date('day_reserved');
             $table->timestamps();
         });
