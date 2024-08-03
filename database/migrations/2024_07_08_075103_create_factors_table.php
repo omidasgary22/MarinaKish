@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->bigInteger('total_price');
-            $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid']);
+            $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid'])->default('Awaiting Payment');
             $table->timestamps();
         });
     }

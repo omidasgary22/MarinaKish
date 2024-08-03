@@ -18,7 +18,7 @@ class Factor extends Model
     protected $casts = [
         'order_id' => 'integer',
         'total_price' => 'integer',
-        'status' => 'enum'
+        'status' => 'string'
     ];
     public function order(): BelongsTo
     {

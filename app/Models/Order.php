@@ -24,7 +24,7 @@ class Order extends Model
     protected $casts = [
         'user_id' => 'integer',
         'product_id' => 'integer',
-        'status' => 'enum',
+        'status' => 'string',
         'factor_id' => 'integer',
         'number' => 'integer',
         'sans_id'=>'integer',
