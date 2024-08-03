@@ -17,8 +17,6 @@ class Order extends Model
         'status',
         'product_id',
         'number',
-        'beath',
-        'passenger_id',
         'factor_id',
         'sans_id',
         'day_reserved'
@@ -27,9 +25,7 @@ class Order extends Model
         'user_id' => 'integer',
         'product_id' => 'integer',
         'status' => 'enum',
-        'beath' => 'datetime',
         'factor_id' => 'integer',
-        'passenger_id' => 'array',
         'number' => 'integer',
         'sans_id'=>'integer',
         'day_reserved' => 'date'

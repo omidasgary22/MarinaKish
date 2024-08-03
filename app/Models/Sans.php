@@ -14,13 +14,13 @@ class Sans extends Model
     protected $fillable =
         [
             'start_time',
-            'remaining',
+            'capacity',
             'product_id',
         ];
     protected $casts =
         [
             'start_time' => 'string',
-            'remaining' => 'integer',
+            'capacity' => 'integer',
             'product_id' => 'integer',
         ];
     public function product(): BelongsTo
