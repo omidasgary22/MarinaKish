@@ -13,7 +13,7 @@ class SansController extends Controller
             Sans::create([
                 'product_id' => $id,
                 'start_time' => $start_time->toTimeString(),
-                'remaining' => $total,
+                'capacity' => $total,
             ]);
             $start_time->addMinute($pending + $time);
         }
