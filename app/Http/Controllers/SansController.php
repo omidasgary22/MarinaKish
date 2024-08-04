@@ -18,4 +18,10 @@ class SansController extends Controller
             $start_time->addMinute($pending + $time);
         }
     }
+    static function update($time, $pending, $total, $start_time,$id, $ended_at)
+    {
+        $sans = new Sans();
+        $sans = $sans->where('product_id',$id)->get();
+        dd($sans);
+    }
 }
