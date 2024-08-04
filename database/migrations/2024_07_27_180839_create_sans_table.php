@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('capacity');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('total_price');
             $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid'])->default('Awaiting Payment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

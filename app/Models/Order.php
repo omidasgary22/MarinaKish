@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'user_id',
         'status',
@@ -27,7 +28,7 @@ class Order extends Model
         'status' => 'string',
         'factor_id' => 'integer',
         'number' => 'integer',
-        'sans_id'=>'integer',
+        'sans_id' => 'integer',
         'day_reserved' => 'date'
     ];
     public function user(): BelongsTo
