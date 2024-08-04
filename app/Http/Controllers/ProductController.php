@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\SansProcessed;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequesr;
 use App\Models\Product;
 use App\Models\Sans;
 use App\Models\User;
@@ -42,7 +43,7 @@ class ProductController extends Controller
             return response()->json(['message' => 'محصول با موفقیت ایجاد شد', 'product' => $product]);
         }
     }
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequesr $request, $id)
     {
         $user = new User();
         $user = $user->find(Auth::id());
