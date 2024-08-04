@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
     Route::post('restore/{id}','restore')->middleware('permission:product.restore')->name('restore');
 });
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
-    Route::get('index', 'index')->name('index');
+    Route::get('index/{id?}', 'index')->name('index');
     Route::post('store','store')->name('store');
     Route::put('update/{id}','update')->name('update');
 });
