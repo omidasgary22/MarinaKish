@@ -36,4 +36,18 @@ class OrderController extends Controller
             return response()->json(["message"=>"ظرفیت پر است"]);
         }
     }
+    public function update(Request $request,$id)
+    {
+        $product_id = $request->product_id;
+        $number = $request->number;
+        $order = new Order();
+        $order = $order->with('factor')->findOrFail($id);
+        $order->update($request->toArray());
+        $order->passengers()->sync($request->passengers_id);
+        FactorController::update($id,$product_id,$number);
+        return response()->json([
+            'message'=>'سفارش شما با موفقیت ویرایش شد',
+            'order'=>$order
+        ]);
+    }
 }
