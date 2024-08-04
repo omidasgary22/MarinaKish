@@ -15,7 +15,8 @@ class FactorySeeder extends Seeder
     public function run(): void
     {
         $admin = User::factory([
-            'name' => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
             'national_code' => 'admin',
             'phone' => '09120000000',
             'email' => 'admin@admin.com',
