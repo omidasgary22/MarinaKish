@@ -45,12 +45,19 @@ class ProductController extends Controller
     }
     public function update(UpdateProductRequesr $request, $id)
     {
+        $time = $request->time;
+        $pending = $request->pending;
+        $total = $request->total;
+        $start_time = Carbon::parse($request->started_at);
+        $ended_at = Carbon::parse($request->ended_at);
         $user = new User();
         $user = $user->find(Auth::id());
         if ($user->hasRole('admin')) {
             $product = new Product();
             $product = $product->find($id);
             $product->update($request->toArray());
+            SansController::update($time, $pending, $total, $start_time,$id, $ended_at);
+            $product = Product::with('sans')->find($id);
             return response()->json(['message' => 'محصول با موفقیت به روز رسانی شد', 'product' => $product]);
         }
     }
