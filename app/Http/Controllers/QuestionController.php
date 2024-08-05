@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -13,13 +15,13 @@ class QuestionController extends Controller
         return response()->json(['faqs' => $faqs]);
     }
 
-    public  function store(StoreFAQRequest $request)
+    public  function store(StoreQuestionRequest $request)
     {
         $faq = Question::create($request->toArray());
         return response()->json(['message' => 'سوال با موفقیت ایجاد شد', 'faq' => $faq], 201);
     }
 
-    public function update(UpdateFAQRequest $request, $id)
+    public function update(UpdateQuestionRequest $request, $id)
     {
         $faq = Question::findorFail($id);
         $faq->update($request->toArray());
