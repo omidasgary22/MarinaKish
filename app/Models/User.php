@@ -4,16 +4,19 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -21,10 +24,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'phone',
         'birth_day',
+        'gender',
         'national_code',
         'password',
     ];
@@ -45,6 +50,13 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'first_name' => 'string',
+        'last_name' => 'string',
+        'email' => 'string',
+        'phone' => 'string',
+        'birth_day' => 'date',
+        'gender' => 'string',
+        'national_code' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'hashed'
     ];
@@ -59,5 +71,9 @@ class User extends Authenticatable
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
+    }
+    public function passengers(): HasMany
+    {
+        return $this->hasMany(Passenger::class);
     }
 }
