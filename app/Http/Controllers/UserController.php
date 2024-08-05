@@ -34,9 +34,18 @@ class UserController extends Controller
     }
     public function create(RegisterRequest $request)
     {
-        $user = User::create($request->merge(["password" => Hash::make($request->password)])->toArray());
-        $user->assignRole('user');
-        return response()->json($user);
+        $user = new User();
+        $code = $request->national_code;
+        $user = $user->onlyTrashed()->where('national_code',$code)->first();
+        if ($user)
+        {
+            $user->onlyTrashed()->restore();
+            $user->update($request->all());
+        }else {
+            $user = User::create($request->toArray());
+            $user->assignRole('user');
+        }
+        return response()->json(["message"=>'ثبت نام با موفقیت انجام شد',"user"=>$user]);
     }
     public function update(UserUpdateRequest $request)
     {
@@ -50,14 +59,14 @@ class UserController extends Controller
         $user = new User();
         $user = $user->find(Auth::id());
         if ($user->hasRole('admin')) {
-            $users = $user->with('comments', 'orders', 'tickets')->orderBy('created_at', 'desc')->paginate(10);
+            $users = $user->with('comments', 'orders', 'tickets','passengers')->orderBy('created_at', 'desc')->paginate(10);
         }
         return response()->json($users);
     }
     public function me()
     {
         $user = new User();
-        $me = $user->with('comments', 'orders', 'tickets')->where('id', Auth::id())->first();
+        $me = $user->with('comments', 'orders', 'tickets','passengers')->where('id', Auth::id())->first();
         return response()->json($me);
     }
 

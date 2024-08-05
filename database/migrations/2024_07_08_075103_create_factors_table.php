@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('factors', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('summary');    //توضیح مختصر
-            $table->text('content');    //جزییات مطالب
-            $table->integer('duration_of_study');    //مدت زمان مطالعه
-            $table->softDeletes();
+            $table->unsignedBigInteger('order_id');
+            $table->bigInteger('total_price');
+            $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid'])->default('Awaiting Payment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('factors');
     }
 };

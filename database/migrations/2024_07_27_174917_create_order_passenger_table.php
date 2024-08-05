@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rules', function (Blueprint $table) {
-            $table->id();
-            $table->string('body');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::create('order_passenger', function (Blueprint $table) {
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('passenger_id');
+            $table->primary(['order_id', 'passenger_id']);
         });
     }
 
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rules');
+        Schema::dropIfExists('order_passenger');
     }
 };

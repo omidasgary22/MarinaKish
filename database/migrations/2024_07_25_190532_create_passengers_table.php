@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('factor', function (Blueprint $table) {
+        Schema::create('passengers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
-            $table->bigInteger('total_price');
-            $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid']);
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->string('national_code');
+            $table->string('phone');
+            $table->date('birth_day');
+            $table->enum('gender', ['male', 'female']);
+            $table->unique(['user_id','phone']);
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('factor');
+        Schema::dropIfExists('passengers');
     }
 };
