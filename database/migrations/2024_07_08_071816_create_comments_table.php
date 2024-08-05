@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
-            $table->unique(['user_id', 'product_id']);
-            $table->string('titel');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('title');
             $table->text('body');
-            $table->text('answer');
+            $table->text('answer')->nullable();
             $table->enum('star', ['1', '2', '3', '4', '5']);
-            $table->enum('status', ['Accepted', 'failed']);
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

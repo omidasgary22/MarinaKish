@@ -12,10 +12,17 @@ class Blog extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
     protected $fillable = [
         'title',
+        'summary',
         'content',
+        'duration_of_study'
     ];
     protected $casts = [
         'title' => 'string',
-        'content' => 'text'
+        'summary' => 'string',
+        'content' => 'string',
+        'duration_of_study' => 'integer',
+        'deleted_at' => 'datetime',
+        'craeted_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
