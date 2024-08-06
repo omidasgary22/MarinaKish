@@ -28,7 +28,7 @@ Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
 Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('product.index');
 Route::get('rules/index{id?}',[RulesController::class,'index'])->name('index');
-Route::get('blogs/index',[BlogController::class,'index'])->name('index');
+Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('index');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
@@ -53,7 +53,7 @@ Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('m
     Route::post('save_image/{model}/{id?}', 'save_image')->name('save');
 });
 Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('tickets')->as('tickets.')->group(function () {
-    Route::get('/index', 'index')->middleware('permission:ticket.index')->name('index');
+    Route::get('/index/{id?}', 'index')->middleware('permission:ticket.index')->name('index');
     Route::post('/store','store')->middleware('permission:ticket.create')->name('store');
     Route::put('/update/{id}','update')->middleware('permission:ticket.update')->name('update');
     Route::delete('/delete/{id}','destroy')->middleware('permission:ticket.delete')->name('delete');
