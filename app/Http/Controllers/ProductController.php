@@ -67,8 +67,11 @@ class ProductController extends Controller
     }
 
     //Suggested
-   // public function uplodeImage(Request $request, $id)
-   // {
+    // public function uplodeImage(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'image' =>'required|max:10000|file|images:jpg,png,jpeg'
+    //    ]);
 
-  //  }
+    //  }
 }
