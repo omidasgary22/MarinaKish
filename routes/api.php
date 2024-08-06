@@ -99,3 +99,6 @@ Route::prefix('faqs')->group(function () {
     Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('faqs.destroy');
     Route::post('/restore/{id}', [QuestionController::class, 'restore'])->name('faqs.restore');
 });
+
+//uplode media to product
+//Route::post('/products/upload/{id}', [ProductController::class, 'uplodeImage']); ----->>>Suggested
