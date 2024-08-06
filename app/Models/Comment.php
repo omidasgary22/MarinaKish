@@ -12,7 +12,6 @@ class Comment extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'title',
         'body',
         'answer',
         'star',
@@ -21,10 +20,9 @@ class Comment extends Model
     protected $casts = [
         'user_id' => 'integer',
         'product_id' => 'integer',
-        'title' => 'string',
         'body' => 'text',
-        'star' => 'enum',
-        'status' => 'enum'
+        'star' => 'string',
+        'status' => 'string'
     ];
     public function user():BelongsTo
     {
