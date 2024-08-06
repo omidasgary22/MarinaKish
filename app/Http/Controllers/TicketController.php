@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -20,7 +21,7 @@ class TicketController extends Controller
 
     public function store($request)
     {
-        $ticket = Ticket::create($request->all());
+        $ticket = Ticket::create($request->merge(['user_id'=>Auth::id()])->all());
         return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket], 201);
     }
 
