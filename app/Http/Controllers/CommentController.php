@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index($id = null)
     {
-        $comments = Comment::with('user', 'product')->get();
+        if (!$id) {
+            $comments = Comment::with('user', 'product')->get();
+        }else{
+            $comments = Comment::with('user', 'product')->findOrFail($id)->get();
+        }
         return response()->json(['comments' => $comments]);
     }
 

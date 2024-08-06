@@ -13,7 +13,7 @@ class TicketController extends Controller
         if (!$id) {
             $tickets = $tickets->all();
         }else{
-            $tickets = $tickets->findOrFail($id);
+            $tickets = $tickets->with('user')->findOrFail($id);
         }
         return response()->json(['tickets' => $tickets]);
     }
