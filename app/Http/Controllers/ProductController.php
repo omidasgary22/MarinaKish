@@ -65,4 +65,10 @@ class ProductController extends Controller
             return response()->json(['message' => 'محصول با موفقیت حذف شد ']);
         }
     }
+
+    //Suggested
+   // public function uplodeImage(Request $request, $id)
+   // {
+
+  //  }
 }
