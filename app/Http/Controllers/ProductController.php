@@ -72,6 +72,26 @@ class ProductController extends Controller
     //     $request->validate([
     //         'image' =>'required|max:10000|file|images:jpg,png,jpeg'
     //    ]);
+    // $product = Product::findOrFail($id);
+    // if ($request->hasFile('image')) 
+    // {
+    //     if ($product->getFirstMedia('images')) {
+    //         $product->clearMediaCollection('images');
+    //     }
+    //     $media = $product->addMedia($request->file('image'))->toMediaCollection('images');
+    //     $mediaUrl = $media->getUrl(); // URL to access the image
+    //     $mediaName = $media->name; // Optional: Media name (if set)
+
+    //     return response()->json([
+    //         'message' => 'تصویر با موفقیت اپلود شد',
+    //         'media_url' => $mediaUrl,
+    //         'media_name' => $mediaName,
+    //     ]);
+    // }
+    // else
+    // {
+    //     return response()->json(['message' => 'هیچ تصویری برای اپلود یافت نشد'], 400);
+    // }
 
     //  }
 }
