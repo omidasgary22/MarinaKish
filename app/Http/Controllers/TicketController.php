@@ -7,22 +7,21 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    public function index()
+    public function index($id = null)
     {
-        $tickets = Ticket::all();
-        return response()->json(['tickets' => $tickets], 200);
+        $tickets = new Ticket();
+        if (!$id) {
+            $tickets = $tickets->all();
+        }else{
+            $tickets = $tickets->findOrFail($id);
+        }
+        return response()->json(['tickets' => $tickets]);
     }
 
     public function store($request)
     {
         $ticket = Ticket::create($request->all());
         return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket], 201);
-    }
-
-    public function show($id)
-    {
-        $ticket = Ticket::with('user')->findOrfail($id);
-        return response()->json(['ticket' => $ticket], 200);
     }
 
     public function update($request, $id)
@@ -41,7 +40,8 @@ class TicketController extends Controller
 
     public function restore($id)
     {
-        $ticket = Ticket::withTrashed()->findOrFail($id);
+        $ticket = new Ticket();
+        $ticket = $ticket->withTrashed()->findOrFail($id);
         $ticket->restore();
         return response()->json(['message' => 'تیکت با موفقیت بازیابی شد '], 200);
     }
