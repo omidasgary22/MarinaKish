@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
 Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('product.index');
+Route::get('rules/index{id?}',[RulesController::class,'index'])->name('index');
+Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('index');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
@@ -43,58 +45,37 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
     Route::post('restore/{id}', 'restore')->middleware('permission:product.restore')->name('restore');
 });
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
-    Route::get('index/{id?}', 'index')->name('index');
-    Route::post('store','store')->name('store');
-    Route::put('update/{id}','update')->name('update');
+    Route::get('index/{id?}', 'index')->middleware('permission:order.index')->name('index');
+    Route::post('store','store')->middleware('permission:order.create')->name('store');
+    Route::put('update/{id}','update')->middleware('permission:order.update')->name('update');
 });
 Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function () {
     Route::post('save_image/{model}/{id?}', 'save_image')->name('save');
 });
-
-//TicketRoute
-Route::prefix('tickets')->group(function () {
-    Route::get('/index', [TicketController::class, 'index'])->name('tickets.index');
-    Route::post('/store', [TicketController::class, 'store'])->name('tickets.store');
-    Route::get('/show/{id}', [TicketController::class, 'show'])->name('tickets.show');
-    Route::put('/update/{id}', [TicketController::class, 'update'])->name('tickets.update');
-    Route::delete('/delete/{id}', [TicketController::class, 'destroy'])->name('tikets.destroy');
-    Route::post('/restore/{id}', [TicketController::class, 'restore'])->name('tickets.restore');
+Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('tickets')->as('tickets.')->group(function () {
+    Route::get('/index/{id?}', 'index')->middleware('permission:ticket.index')->name('index');
+    Route::post('/store','store')->middleware('permission:ticket.create')->name('store');
+    Route::put('/update/{id}','update')->middleware('permission:ticket.update')->name('update');
+    Route::delete('/delete/{id}','destroy')->middleware('permission:ticket.delete')->name('delete');
+});
+Route::middleware('auth:sanctum')->controller(RulesController::class)->prefix('rules')->as('rules.')->group(function () {
+    Route::post('/store','store')->middleware('permission:rule.create')->name('store');
+    Route::put('/update/{id}','update')->middleware('permission:rule.update')->name('update');
+    Route::delete('/delete/{id}','destroy')->middleware('permission:rule.delete')->name('destroy');
+    Route::post('/restore/{id}','restore')->middleware('permission:rule.restore')->name('restore');
 });
 
-//RuleRoute
-Route::prefix('rules')->group(function () {
-    Route::get('/index/{id?}', [RulesController::class, 'index'])->name('rules.index');
-    Route::post('/store', [RulesController::class, 'store'])->name('rules.store');
-    Route::put('/update/{id}', [RulesController::class, 'update'])->name('rules.update');
-    Route::delete('/delete/{id}', [RulesController::class, 'destroy'])->name('rules.destroy');
-    Route::post('/restore/{id}', [RulesController::class, 'restore'])->name('rules.restore');
+Route::middleware('auth:sanctum')->controller(BlogController::class)->prefix('blogs')->as('blogs.')->group(function () {
+
+    Route::post('/store','store')->middleware('permission:blog.create')->name('store');
+    Route::put('/update/{id}','update')->middleware('permission:blog.update')->name('update');
+    Route::delete('/delete/{id}','destroy')->middleware('permission:blog.delete')->name('destroy');
+    Route::post('/restore/{id}','restore')->middleware('permission:blog.restore')->name('restore');
+});
+Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix('comments')->as('comment.')->group(function () {
+    Route::get('/index{id?}','index')->middleware('permission:comment.index')->name('index');
+    Route::post('/store','store')->middleware('permission:comment.create')->name('comments.store');
+    Route::delete('/delete/{id}','destroy')->middleware('permission:comment.delete')->name('destroy');
+    Route::post('/restore/{id}','restore')->middleware('permission:comment.restore')->name('restore');
 });
 
-//BlogRoute
-Route::prefix('blogs')->group(function () {
-    Route::get('/index', [BlogController::class, 'index'])->name('blogs.index');
-    Route::post('/store', [BlogController::class, 'store'])->name('blogs.store');
-    Route::get('/show/{id}', [BlogController::class, 'show'])->name('blogs.show');
-    Route::put('/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
-    Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
-    Route::post('/restore/{id}', [BlogController::class, 'restore'])->name('blogs.restore');
-});
-
-//CommentRoute
-Route::prefix('comments')->group(function () {
-    Route::get('/index{id?}', [CommentController::class, 'index'])->name('comments.index');
-    Route::post('/store', [CommentController::class, 'store'])->name('comments.store');
-    Route::put('/update/{id}', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('/delete/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
-    Route::post('/restore/{id}', [CommentController::class, 'restore'])->name('comments.restore');
-    Route::get('/show/{id}', [CommentController::class, 'show'])->name('comments.show');
-});
-
-//FAQRoute
-Route::prefix('faqs')->group(function () {
-    Route::get('/index/{id?}', [QuestionController::class, 'index'])->name('faqs.index');
-    Route::post('/store', [QuestionController::class, 'store'])->name('faqs.store');
-    Route::put('/update/{id}', [QuestionController::class, 'update'])->name('faqs.update');
-    Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('faqs.destroy');
-    Route::post('/restore/{id}', [QuestionController::class, 'restore'])->name('faqs.restore');
-});

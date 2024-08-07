@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('body');
-            $table->enum('status', ['wating', 'answered']);
+            $table->enum('status', ['wating', 'answered'])->default('Wating');
             $table->enum('priority', ['Important', 'medium', 'low']);
             $table->softDeletes();
             $table->timestamps();

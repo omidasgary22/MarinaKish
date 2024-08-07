@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('title');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->text('answer')->nullable();
-            $table->enum('star', ['1', '2', '3', '4', '5']);
+            $table->enum('star', ['1', '2', '3', '4', '5'])->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->softDeletes();
             $table->timestamps();
