@@ -12,7 +12,7 @@ class TicketController extends Controller
     {
         $tickets = new Ticket();
         if (!$id) {
-            $tickets = $tickets->all();
+            $tickets = $tickets->orderBy('created_at','desc')->psginate(10);
         } else {
             $tickets = $tickets->with('user')->findOrFail($id);
         }
