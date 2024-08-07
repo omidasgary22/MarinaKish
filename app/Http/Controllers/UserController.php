@@ -30,6 +30,7 @@ class UserController extends Controller
     public function logout()
     {
         $user = new User();
+        $user = $user->find(Auth::id());
         $user->tokens()->delete();
     }
     public function create(RegisterRequest $request)
