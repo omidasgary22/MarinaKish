@@ -20,7 +20,7 @@ class Comment extends Model
     protected $casts = [
         'user_id' => 'integer',
         'product_id' => 'integer',
-        'body' => 'text',
+        'body' => 'string',
         'star' => 'string',
         'status' => 'string'
     ];
