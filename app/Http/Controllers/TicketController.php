@@ -19,13 +19,13 @@ class TicketController extends Controller
         return response()->json(['tickets' => $tickets]);
     }
 
-    public function store($request)
+    public function store(Request $request)
     {
         $ticket = Ticket::create($request->merge(['user_id'=>Auth::id()])->all());
-        return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket], 201);
+        return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket]);
     }
 
-    public function update($request, $id)
+    public function update(Request $request, $id)
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->update($request->all());
