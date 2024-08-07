@@ -59,10 +59,10 @@ Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('
     Route::delete('/delete/{id}','destroy')->middleware('permission:ticket.delete')->name('delete');
 });
 Route::middleware('auth:sanctum')->controller(RulesController::class)->prefix('rules')->as('rules.')->group(function () {
-    Route::post('/store','store')->middleware('permission:rule.create')->name('rules.store');
-    Route::put('/update/{id}','update')->middleware('permission:rule.update')->name('rules.update');
-    Route::delete('/delete/{id}','destroy')->middleware('permission:rule.delete')->name('rules.destroy');
-    Route::post('/restore/{id}','restore')->middleware('permission:rule.restore')->name('rules.restore');
+    Route::post('/store','store')->middleware('permission:rule.create')->name('store');
+    Route::put('/update/{id}','update')->middleware('permission:rule.update')->name('update');
+    Route::delete('/delete/{id}','destroy')->middleware('permission:rule.delete')->name('destroy');
+    Route::post('/restore/{id}','restore')->middleware('permission:rule.restore')->name('restore');
 });
 
 Route::middleware('auth:sanctum')->controller(BlogController::class)->prefix('blogs')->as('blogs.')->group(function () {
