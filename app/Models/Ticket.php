@@ -19,9 +19,9 @@ class Ticket extends Model
     protected $casts = [
         'title' => 'string',
         'user_id' => 'integer',
-        'body' => 'text',
-        'status' => 'enum',
-        'priority' => 'enum'
+        'body' => 'array',
+        'status' => 'string',
+        'priority' => 'string'
     ];
     public function user():BelongsTo
     {
