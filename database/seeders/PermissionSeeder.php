@@ -42,6 +42,7 @@ class PermissionSeeder extends Seeder
         $comment_create = Permission::create(['name' => 'comment.create']);
         $comment_delete = Permission::create(['name' => 'comment.delete']);
         $comment_restore = Permission::create(['name' => 'comment.restore']);
+        $comment_index = Permission::create(['name'=>'comment.index']);
 
         $admin->givePermissionTo(Permission::all());
         $user->givePermissionTo([
