@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->controller(BlogController::class)->prefix('bl
 });
 Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix('comments')->as('comment.')->group(function () {
     Route::get('/index{id?}','index')->middleware('permission:comment.index')->name('index');
-    Route::post('/store','store')->middleware('permission:comment.store')->name('comments.store');
+    Route::post('/store','store')->middleware('permission:comment.create')->name('comments.store');
     Route::delete('/delete/{id}','destroy')->middleware('permission:comment.delete')->name('destroy');
     Route::post('/restore/{id}','restore')->middleware('permission:comment.restore')->name('restore');
 });
