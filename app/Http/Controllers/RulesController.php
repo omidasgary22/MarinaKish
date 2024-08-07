@@ -10,7 +10,7 @@ class RulesController extends Controller
     public function index()
     {
         $rules = Rules::all();
-        return response()->json(['rules' => 'rules']);
+        return response()->json(['rules' => $rules]);
     }
 
     public function store(Request $request)
