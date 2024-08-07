@@ -13,7 +13,7 @@ class TicketController extends Controller
         $tickets = new Ticket();
         if (!$id) {
             $tickets = $tickets->all();
-        }else{
+        } else {
             $tickets = $tickets->with('user')->findOrFail($id);
         }
         return response()->json(['tickets' => $tickets]);
@@ -21,7 +21,7 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        $ticket = Ticket::create($request->merge(['user_id'=>Auth::id()])->all());
+        $ticket = Ticket::create($request->merge(['user_id' => Auth::id()])->all());
         return response()->json(['message' => 'تیکت با موفقیت ایجاد شد', 'ticket' => $ticket]);
     }
 
@@ -29,7 +29,7 @@ class TicketController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->update($request->all());
-        return response()->json(['message' => 'تیکت با موفقیت به روز رسانی شد ', 'ticket' => '$ticket'], 200);
+        return response()->json(['message' => 'تیکت با موفقیت به روز رسانی شد ', 'ticket' => $ticket], 200);
     }
 
     public function destroy($id)
