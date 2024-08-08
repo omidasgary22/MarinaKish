@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
     Route::get('index/{id?}', 'index')->middleware('permission:order.index')->name('index');
     Route::post('store','store')->middleware('permission:order.create')->name('store');
-    Route::put('update/{id}','update')->middleware('permission:order.update')->name('update');
+    Route::put('cancel/{id}','destroy')->middleware('permission:order.delete')->name('cancel');
 });
 Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function () {
     Route::post('save_image/{model}/{id?}', 'save_image')->name('save');
