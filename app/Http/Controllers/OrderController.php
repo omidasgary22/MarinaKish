@@ -57,10 +57,9 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = new Order();
-        $order = $order->with('factor')->findOrFail($id);
-        $order->delete();
+        $order->delete($id);
         return response()->json([
-            'message' => 'سفارش شما با موفقیت ویرایش شد',
+            "message"=>'سفارش با موفقیت لغو شد',
             'order' => $order
         ]);
     }
