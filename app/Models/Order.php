@@ -8,17 +8,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'user_id',
         'status',
         'product_id',
         'number',
-        'beath',
-        'passenger_id',
         'factor_id',
         'sans_id',
         'day_reserved'
@@ -26,12 +25,10 @@ class Order extends Model
     protected $casts = [
         'user_id' => 'integer',
         'product_id' => 'integer',
-        'status' => 'enum',
-        'beath' => 'datetime',
+        'status' => 'string',
         'factor_id' => 'integer',
-        'passenger_id' => 'array',
         'number' => 'integer',
-        'sans_id'=>'integer',
+        'sans_id' => 'integer',
         'day_reserved' => 'date'
     ];
     public function user(): BelongsTo

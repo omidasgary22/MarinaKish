@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('sans', function (Blueprint $table) {
             $table->id();
             $table->time('start_time');
-            $table->integer('remaining');
+            $table->integer('capacity');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

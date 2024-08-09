@@ -16,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles,SoftDeletes,InteractsWithMedia;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,8 @@ class User extends Authenticatable implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'phone',
         'birth_day',
@@ -49,12 +50,13 @@ class User extends Authenticatable implements HasMedia
      * @var array<string, string>
      */
     protected $casts = [
-        'name'=>'string',
-        'email'=>'string',
-        'phone'=>'string',
-        'birth_day'=>'date',
-        'gender'=>'string',
-        'national_code'=>'string',
+        'first_name' => 'string',
+        'last_name' => 'string',
+        'email' => 'string',
+        'phone' => 'string',
+        'birth_day' => 'date',
+        'gender' => 'string',
+        'national_code' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'hashed'
     ];
@@ -70,12 +72,8 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(Ticket::class);
     }
-<<<<<<< HEAD
-    
-=======
-    public function passengers():HasMany
+    public function passengers(): HasMany
     {
         return $this->hasMany(Passenger::class);
     }
->>>>>>> f52923cfd06c9f55c85f9d0725db4beb2976cde0
 }

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $fillable = [
         'title',
         'user_id',
@@ -19,9 +20,9 @@ class Ticket extends Model
     protected $casts = [
         'title' => 'string',
         'user_id' => 'integer',
-        'body' => 'text',
-        'status' => 'enum',
-        'priority' => 'enum'
+        'body' => 'array',
+        'status' => 'string',
+        'priority' => 'string'
     ];
     public function user():BelongsTo
     {

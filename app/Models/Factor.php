@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Factor extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'order_id',
         'total_price',
@@ -18,7 +19,7 @@ class Factor extends Model
     protected $casts = [
         'order_id' => 'integer',
         'total_price' => 'integer',
-        'status' => 'enum'
+        'status' => 'string'
     ];
     public function order(): BelongsTo
     {

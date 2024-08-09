@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\SansProcessed;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequesr;
 use App\Models\Product;
 use App\Models\Sans;
 use App\Models\User;
@@ -33,37 +34,46 @@ class ProductController extends Controller
         $total = $request->total;
         $start_time = Carbon::parse($request->started_at);
         $ended_at = Carbon::parse($request->ended_at);
-        if ($user->hasRole('admin')) {
-            $product = new Product();
-            $product = $product->create($request->toArray());
-            $id = $product->id;
-            SansController::store($time, $pending, $total, $start_time, $ended_at, $id);
-            $product = Product::with('sans')->find($id);
-            return response()->json(['message' => 'محصول با موفقیت ایجاد شد', 'product' => $product]);
-        }
+        $product = new Product();
+        $product = $product->create($request->toArray());
+        $id = $product->id;
+        SansController::store($time, $pending, $total, $start_time, $ended_at, $id);
+        $product = Product::with('sans')->find($id);
+        return response()->json(['message' => 'محصول با موفقیت ایجاد شد', 'product' => $product]);
     }
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequesr $request, $id)
     {
+        $time = $request->time;
+        $pending = $request->pending;
+        $total = $request->total;
+        $start_time = Carbon::parse($request->started_at);
+        $ended_at = Carbon::parse($request->ended_at);
         $user = new User();
         $user = $user->find(Auth::id());
-        if ($user->hasRole('admin')) {
-            $product = new Product();
-            $product = $product->find($id);
-            $product->update($request->toArray());
-            return response()->json(['message' => 'محصول با موفقیت به روز رسانی شد', 'product' => $product]);
-        }
+        $product = new Product();
+        $product = $product->find($id);
+        $product->update($request->toArray());
+        SansController::update($time, $pending, $total, $start_time, $id, $ended_at);
+        $product = Product::with('sans')->find($id);
+        return response()->json(['message' => 'محصول با موفقیت به روز رسانی شد', 'product' => $product]);
     }
 
     public function destroy($id)
     {
         $user = new User();
         $user = $user->find(Auth::id());
-        if ($user->hasRole('admin')) {
-            $product = new Product();
-            $product = $product->find($id);
-            $product->delete($id);
-            return response()->json(['message' => 'محصول با موفقیت حذف شد ']);
-        }
+
+        $product = new Product();
+        $product = $product->find($id);
+        $product->delete($id);
+        return response()->json(['message' => 'محصول با موفقیت غیر فعال  شد ']);
+    }
+    public function restore($id)
+    {
+        $product = new Product();
+        $product = $product->onlyTrashed()->findOrFail($id);
+        $product->restore();
+        return response()->json(["message"=>'محصول با موفقیت فعال شد']);
     }
 
     //Suggested

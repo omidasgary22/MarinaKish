@@ -30,13 +30,14 @@ class UserController extends Controller
     public function logout()
     {
         $user = new User();
+        $user = $user->find(Auth::id());
         $user->tokens()->delete();
     }
     public function create(RegisterRequest $request)
     {
         $user = new User();
-        $phone = $request->phone;
-        $user = $user->onlyTrashed()->where('phone',$phone)->first();
+        $code = $request->national_code;
+        $user = $user->onlyTrashed()->where('national_code',$code)->first();
         if ($user)
         {
             $user->onlyTrashed()->restore();
@@ -45,7 +46,7 @@ class UserController extends Controller
             $user = User::create($request->toArray());
             $user->assignRole('user');
         }
-        return response()->json($user);
+        return response()->json(["message"=>'ثبت نام با موفقیت انجام شد',"user"=>$user]);
     }
     public function update(UserUpdateRequest $request)
     {

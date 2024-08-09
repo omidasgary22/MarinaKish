@@ -22,7 +22,8 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:50',
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
             'email' => 'required|email|string',
             'birth_day' => 'required|date',
         ];
@@ -31,9 +32,12 @@ class UserUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'نام الزامی است.',
-            'name.string' => 'نام باید یک رشته متنی باشد.',
-            'name.max' => 'نام نباید بیشتر از ۲۵۵ کاراکتر باشد.',
+            'first_name.required' => 'نام الزامی است.',
+            'first_name.string' => 'نام باید یک رشته متنی باشد.',
+            'first_name.max' => 'نام نباید بیشتر از ۲۵۵ کاراکتر باشد.',
+            'last_name.required' => 'نام خانوادگی الزامی است.',
+            'last_name.string' => 'نام خانوادگی باید یک رشته متنی باشد.',
+            'last_name.max' => 'نام خانوادگی نباید بیشتر از ۲۵۵ کاراکتر باشد.',
 
             'phone_number.required' => 'شماره تلفن الزامی است.',
             'phone_number.string' => 'شماره تلفن باید یک رشته متنی باشد.',
