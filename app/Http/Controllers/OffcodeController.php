@@ -16,11 +16,11 @@ class OffcodeController extends Controller
         $off_code = $off_code->Create($request->toArray());
         return response()->json(['message'=>'کد تخفیف با موفقیت ثبت شد','off code' => $off_code]);
     }
-    public function use($code_id,$factore_id)
+    public function use(Request $request,$factore_id)
     {
         $factor = new Factor();
         $off_code = new Offcode();
-        $off_code = $off_code->findOrFail($code_id);
+        $off_code = $off_code->where('code',$request->code)->first();
         $number = $off_code->number;
         $expire = $off_code->expire_time;
         $today = Carbon::now();
@@ -34,7 +34,7 @@ class OffcodeController extends Controller
                 'total_price'=>$new_price
             ]);
             $number = $number - 1;
-            Offcode::find($code_id)->update([
+            Offcode::where("code",$request->code)->update([
                 'number'=>$number
             ]);
             return response()->json($factor);
