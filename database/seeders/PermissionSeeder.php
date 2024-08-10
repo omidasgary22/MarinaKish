@@ -43,6 +43,12 @@ class PermissionSeeder extends Seeder
         $comment_delete = Permission::create(['name' => 'comment.delete']);
         $comment_restore = Permission::create(['name' => 'comment.restore']);
         $comment_index = Permission::create(['name'=>'comment.index']);
+        $off_code_index = Permission::create(['name' => 'off_code.index']);
+        $off_code_update = Permission::create(['name' => 'off_code.update']);
+        $off_code_delete = Permission::create(['name' => 'off_code.delete']);
+        $off_code_restore = Permission::create(['name' => 'off_code.restore']);
+        $off_code_create = Permission::create(['name' => 'off_code.create']);
+
 
         $admin->givePermissionTo(Permission::all());
         $user->givePermissionTo([
