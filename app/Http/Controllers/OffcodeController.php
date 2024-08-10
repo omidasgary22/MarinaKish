@@ -24,7 +24,7 @@ class OffcodeController extends Controller
         $number = $off_code->number;
         $expire = $off_code->expire_time;
         $today = Carbon::now();
-        if(($number > 0)and($today->lessThan($expire)))
+        if(($number > 0)and($today->lessThan($expire))and !$off_code)
         {
             $factor = $factor->find($factore_id);
             $price = $factor->total_price;
