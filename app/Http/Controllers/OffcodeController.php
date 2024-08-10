@@ -16,6 +16,13 @@ class OffcodeController extends Controller
         $off_code = $off_code->Create($request->toArray());
         return response()->json(['message'=>'کد تخفیف با موفقیت ثبت شد','off code' => $off_code]);
     }
+    public function update(Request $request,$id)
+    {
+        $off_code = new Offcode();
+        $off_code = $off_code->findOrFail($id);
+        $off_code->update($request->toArray());
+        return response()->json(['message'=>'کد تخفیف با موفقیت به روزرسانی شد','off code'=>$off_code]);
+    }
     public function use(Request $request,$factore_id)
     {
         $factor = new Factor();
@@ -41,5 +48,19 @@ class OffcodeController extends Controller
         }else{
             return response()->json('کد تخفیف معتبر نمی باشد');
         }
+    }
+    public function delete($id)
+    {
+        $off_code = new Offcode();
+        $off_code = $off_code->find($id);
+        $off_code->delete();
+        return response()->json(["message"=>'کد تخفیف با موفقیت غیر فعال شد']);
+    }
+    public function restore($id)
+    {
+        $off_code = new Offcode();
+        $off_code = $off_code->onlyTrash()->find($id);
+        $off_code->restore();
+        return response()->json(["message"=>'کد تخفیف با موفقیت باز گزدانی شد','off code'=> $off_code]);
     }
 }
