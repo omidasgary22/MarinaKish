@@ -22,9 +22,11 @@ class PermissionSeeder extends Seeder
             $admin = Role::create(['name' => 'Admin']);
         }
 
-          //userRole
-          $user = Role::where('name', 'user')->exists();
-          if (!$user) {
+        //userRole
+        $user = Role::where('name', 'user')->exists();
+        if (!$user) {
+            $user = Role::create(['name' => 'user']);
+        }
 
 
         $user_index = Permission::create(['name' => 'user.index']);
