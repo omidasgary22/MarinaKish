@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 
 class OffcodeController extends Controller
 {
+    public function index($id = null)
+    {
+        if (!$id) {
+            $off_codes = Offcode::all();
+        }else{
+             $off_codes = Offcode::findeOrFail($id);
+        }
+        return response()->json(['off code'=>$off_codes]);
+    }
     public function store( Request $request)
     {
         $off_code = new Offcode();
