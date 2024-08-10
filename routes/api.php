@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\OffcodeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuestionController;
@@ -78,4 +79,7 @@ Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix(
     Route::delete('/delete/{id}','destroy')->middleware('permission:comment.delete')->name('destroy');
     Route::post('/restore/{id}','restore')->middleware('permission:comment.restore')->name('restore');
 });
-
+Route::middleware('auth:sanctum')->controller(OffcodeController::class)->prefix('off_codes')->as('off_codes.')->group(function(){
+    Route::post('store','store')->name('store');
+    Route::get('use/{code_id}/{factor_id}','use')->name('use');
+});
