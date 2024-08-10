@@ -82,4 +82,7 @@ Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix(
 Route::middleware('auth:sanctum')->controller(OffcodeController::class)->prefix('off_codes')->as('off_codes.')->group(function(){
     Route::post('store','store')->name('store');
     Route::get('use/{code_id}/{factor_id}','use')->name('use');
+    Route::put("update/{id}",'update')->name('update');
+    Route::delete('delete/{id}','delete')->name('delete');
+    Route::post('restore/{id}','restore')->name('restore');
 });
