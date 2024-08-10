@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('factors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->bigInteger('total_price');
             $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid'])->default('Awaiting Payment');
             $table->timestamps();

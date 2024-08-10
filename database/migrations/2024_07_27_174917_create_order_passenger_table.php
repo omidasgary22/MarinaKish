@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_passenger', function (Blueprint $table) {
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('passenger_id');
-            $table->primary(['order_id', 'passenger_id']);
+            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('passenger_id')->constrained('passengers');
         });
     }
 

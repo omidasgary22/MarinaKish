@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->time('start_time');
             $table->integer('capacity');
-            $table->unsignedBigInteger('product_id');
+            $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
     }
