@@ -22,6 +22,10 @@ class PermissionSeeder extends Seeder
             $admin = Role::create(['name' => 'Admin']);
         }
 
+          //userRole
+          $user = Role::where('name', 'user')->exists();
+          if (!$user) {
+
 
         $user_index = Permission::create(['name' => 'user.index']);
         $user_delete = Permission::create(['name' => 'user.delete']);
