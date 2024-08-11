@@ -26,6 +26,7 @@ class UserUpdateRequest extends FormRequest
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|string',
             'birth_day' => 'required|date',
+            'gender' => 'required|in:male,female',
         ];
     }
 
@@ -62,6 +63,7 @@ class UserUpdateRequest extends FormRequest
             'password.string' => 'رمز عبور باید یک رشته متنی باشد.',
             'password.min' => 'رمز عبور باید حداقل ۸ کاراکتر باشد.',
             'password.confirmed' => 'تأیید رمز عبور مطابقت ندارد.',
+            'gender.required' => 'جنسیت اجباری است'
         ];
     }
 }
