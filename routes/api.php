@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MediaController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
+use App\Models\Passenger;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -88,4 +90,10 @@ Route::middleware('auth:sanctum')->controller(OffcodeController::class)->prefix(
     Route::put("update/{id}",'update')->middleware('permission:off_code.update')->name('update');
     Route::delete('delete/{id}','delete')->middleware('permission:off_code.delete')->name('delete');
     Route::post('restore/{id}','restore')->middleware('permission:off_code.restore')->name('restore');
+});
+Route::middleware('auth:sanctum')->controller(PassengerController::class)->prefix('passengers')->as('passengers.')->group(function(){
+    Route::get('index/{id?}','index')->middleware('permission:passenger.index')->name('index');
+    Route::post('store','store')->middleware('permission:passenger.create')->name('store');
+    Route::put('update/{id}','update')->middleware('permission:passenger.update')->name('update');
+    Route::delete('delete/{id}','destroy')->middleware('permission:passenger.delete')->name('destroy');
 });
