@@ -21,6 +21,7 @@ class PermissionSeeder extends Seeder
         $me = Permission::create(['name' => 'me']);
         $profile_update = Permission::create(['name' => 'profile.update']);
         $reset_password = Permission::create(['name' => 'reset.password']);
+        $product_index = Permission::create(['name'=>'product.index']);
         $product_create = Permission::create(['name' => 'product.create']);
         $product_update = Permission::create(['name' => 'product.update']);
         $product_delete = Permission::create(['name' => 'product.delete']);
