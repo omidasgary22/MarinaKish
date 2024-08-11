@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->foreignId('factor_id')->references('id')->on('factors');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('factor_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unique('factor_id');
             $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation'])->default('Awaiting Payment');
             $table->integer('sans_id');
