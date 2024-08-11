@@ -25,16 +25,15 @@ class ProductController extends Controller
         }
         return response()->json($products);
     }
-    public function admin_index($id)
+    public function admin_index($id = null)
     {
         $product = new Product();
-        if($id)
-        {
-            $product = $product->with('sans','orders','comments','labels');
-        }else{
-            $product = $product->all()->orderBy('created_at','desc')->paginate(10);
+        if ($id) {
+            $product = $product->with('sans', 'orders', 'comments', 'labels');
+        } else {
+            $product = $product->all()->orderBy('created_at', 'desc')->paginate(10);
         }
-        return response()->json(['product'=>$product]);
+        return response()->json(['product' => $product]);
     }
     public function store(StoreProductRequest $request)
     {
@@ -84,6 +83,6 @@ class ProductController extends Controller
         $product = new Product();
         $product = $product->onlyTrashed()->findOrFail($id);
         $product->restore();
-        return response()->json(["message"=>'محصول با موفقیت فعال شد']);
+        return response()->json(["message" => 'محصول با موفقیت فعال شد']);
     }
 }
