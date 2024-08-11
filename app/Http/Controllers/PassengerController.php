@@ -17,6 +17,20 @@ class PassengerController extends Controller
             $passenger->restore();
             $passenger->update($request->toArray());
         }
-        return response()->json($passenger);
+        return response()->json(['message'=>'گردشگر با موفقیت ثبت شد','passenger'=>$passenger]);
+    }
+    public function update(Request $request,$id)
+    {
+        $passenger = new Passenger();
+        $passenger = $passenger->find($id);
+        $passenger->update($request->toArray());
+        return response()->json(['message'=>'اطلاعات گردشگر با موفقیت به روز رسانی شد','passenger'=>$passenger]);
+    }
+    public function destroy($id)
+    {
+        $passenger = new Passenger();
+        $passenger = $passenger->find($id);
+        $passenger->delete();
+        return response()->json(['message'=>'گردشگر با موفقیت حذف شد']);
     }
 }
