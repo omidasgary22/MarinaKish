@@ -69,7 +69,7 @@ Route::middleware('auth:sanctum')->controller(RulesController::class)->prefix('r
 });
 
 Route::middleware('auth:sanctum')->controller(BlogController::class)->prefix('blogs')->as('blogs.')->group(function () {
-
+    Route::get('index/admin/{id?}')->middleware('permission:blog.index')->name('admin index');
     Route::post('/store','store')->middleware('permission:blog.create')->name('store');
     Route::put('/update/{id}','update')->middleware('permission:blog.update')->name('update');
     Route::delete('/delete/{id}','destroy')->middleware('permission:blog.delete')->name('destroy');
