@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::delete('logout','logout')->name('logout');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
+    Route::get('index/admin/{id?}','admin_index')->middleware('permission:product.index')->name('admin index');
     Route::post('store', 'store')->middleware('permission:product.create')->name('store');
     Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
     Route::delete('delete/{id}', 'destroy')->middleware('permission:product.delete')->name('destroy');
