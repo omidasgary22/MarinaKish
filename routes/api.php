@@ -93,7 +93,6 @@ Route::middleware('auth:sanctum')->controller(OffcodeController::class)->prefix(
 });
 Route::middleware('auth:sanctum')->controller(PassengerController::class)->prefix('passengers')->as('passengers.')->group(function(){
     Route::get('index/{id?}','index')->middleware('permission:passenger.index')->name('index');
-    Route::get('index/admin/{id?}')->middleware('permission:passenger.admin.index')->name('admin index');
     Route::post('store','store')->middleware('permission:passenger.create')->name('store');
     Route::put('update/{id}','update')->middleware('permission:passenger.update')->name('update');
     Route::delete('delete/{id}','destroy')->middleware('permission:passenger.delete')->name('destroy');
