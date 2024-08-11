@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('
     Route::delete('/delete/{id}','destroy')->middleware('permission:ticket.delete')->name('delete');
 });
 Route::middleware('auth:sanctum')->controller(RulesController::class)->prefix('rules')->as('rules.')->group(function () {
-    Route::get('index/admin/index/{id?}','admin_index')->middleware('permission:rule.index')->name('admin index');
+    Route::get('index/admin/{id?}','admin_index')->middleware('permission:rule.index')->name('admin index');
     Route::post('/store','store')->middleware('permission:rule.create')->name('store');
     Route::put('/update/{id}','update')->middleware('permission:rule.update')->name('update');
     Route::delete('/delete/{id}','destroy')->middleware('permission:rule.delete')->name('destroy');
