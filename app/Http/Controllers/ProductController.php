@@ -19,11 +19,22 @@ class ProductController extends Controller
     {
         $products = new Product();
         if ($id) {
-            $products = $products->find($id);
+            $products = $products->with('sans')->find($id);
         } else {
-            $products = $products->with('sans')->orderBy('id', 'desc')->paginate(10);
+            $products = $products->all();
         }
         return response()->json($products);
+    }
+    public function admin_index($id)
+    {
+        $product = new Product();
+        if($id)
+        {
+            $product = $product->with('sans','orders','comments','labels');
+        }else{
+            $product = $product->all()->orderBy('created_at','desc')->paginate(10);
+        }
+        return response()->json(['product'=>$product]);
     }
     public function store(StoreProductRequest $request)
     {
