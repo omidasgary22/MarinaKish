@@ -38,6 +38,7 @@ class PermissionSeeder extends Seeder
         $rule_update = Permission::create(['name' => 'rule.update']);
         $rule_delete = Permission::create(['name' => 'rule.delete']);
         $rule_restore = Permission::create(['name' => 'rule.restore']);
+        $blog_index = Permission::create(['name'=>'blog.index']);
         $blog_create = Permission::create(['name' => 'blog.create']);
         $blog_update = Permission::create(['name' => 'blog.update']);
         $blog_delete = Permission::create(['name' => 'blog.delete']);
