@@ -51,6 +51,10 @@ class PermissionSeeder extends Seeder
         $off_code_delete = Permission::create(['name' => 'off_code.delete']);
         $off_code_restore = Permission::create(['name' => 'off_code.restore']);
         $off_code_create = Permission::create(['name' => 'off_code.create']);
+        $passenger_index = Permission::create(['name' => 'passenger.index']);
+        $passenger_create = Permission::create(['name' => 'passenger.create']);
+        $passenger_update = Permission::create(['name' => 'passenger.update']);
+        $passenger_delete = Permission::create(['name' => 'passenger.delete']);
 
 
         $admin->givePermissionTo(Permission::all());
@@ -58,7 +62,8 @@ class PermissionSeeder extends Seeder
             $user_delete,$me,$profile_update,$reset_password,
             $order_create,$order_delete,$order_index,
             $ticket_create,$ticket_update,$ticket_delete,$ticket_index,
-            $comment_create
+            $comment_create,
+            $passenger_index,$passenger_create,$passenger_update,$passenger_delete,
         ]);
     }
 }
