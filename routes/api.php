@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
 });
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
     Route::get('index/{id?}', 'index')->middleware('permission:order.index')->name('index');
+    Route::get('index/admin/{id?}','admin_index')->middleware('permission:order.admin.index')->name('admin index');
     Route::post('store','store')->middleware('permission:order.create')->name('store');
     Route::delete('cancel/{id}','destroy')->middleware('permission:order.delete')->name('cancel');
 });
