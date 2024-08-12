@@ -79,37 +79,3 @@ Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix(
     Route::post('/restore/{id}','restore')->middleware('permission:comment.restore')->name('restore');
 });
 
-<<<<<<< HEAD
-//BlogRoute
-Route::prefix('blogs')->group(function () {
-    Route::get('/index', [BlogController::class, 'index'])->name('blogs.index');
-    Route::post('/store', [BlogController::class, 'store'])->name('blogs.store');
-    Route::get('/show/{id}', [BlogController::class, 'show'])->name('blogs.show');
-    Route::put('/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
-    Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
-    Route::post('/restore/{id}', [BlogController::class, 'restore'])->name('blogs.restore');
-});
-
-//CommentRoute
-Route::prefix('comments')->group(function () {
-    Route::get('/index{id?}', [CommentController::class, 'index'])->name('comments.index');
-    Route::post('/store', [CommentController::class, 'store'])->name('comments.store');
-    Route::put('/update/{id}', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('/delete/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
-    Route::post('/restore/{id}', [CommentController::class, 'restore'])->name('comments.restore');
-    Route::get('/show/{id}', [CommentController::class, 'show'])->name('comments.show');
-});
-
-//FAQRoute
-Route::prefix('faqs')->group(function () {
-    Route::get('/index/{id?}', [QuestionController::class, 'index'])->name('faqs.index');
-    Route::post('/store', [QuestionController::class, 'store'])->name('faqs.store');
-    Route::put('/update/{id}', [QuestionController::class, 'update'])->name('faqs.update');
-    Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('faqs.destroy');
-    Route::post('/restore/{id}', [QuestionController::class, 'restore'])->name('faqs.restore');
-});
-
-//uplode media to product
-//Route::post('/products/upload/{id}', [ProductController::class, 'uplodeImage']); ----->>>Suggested
-=======
->>>>>>> dc9f6b788b2860789e62b1e1051a2bf8c6de6fe2
