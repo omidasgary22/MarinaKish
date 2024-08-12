@@ -20,18 +20,18 @@ class OrderController extends Controller
         $order = new Order();
         $user = new User();
         $user = $user->find(Auth::id());
-        if ($user->hasRole('admin')) {
-            if (!$id) {
-                $order = $order->orderBy('created_at', 'desc')->paginate(10);
-            } else {
-                $order = $order->with('factor', 'product:name', 'sans:start_time', 'passengers', 'user')->find($id);
-            }
-        } elseif ($user->hasRole('user')) {
-            $order = $order->where('user_id', Auth::id())->where('id', $id)->first();
-        }
+        $order = $order->where('user_id', Auth::id())->where('id', $id)->first();
         return response()->json($order);
     }
-
+    public function admin_index($id = null)
+    {
+        $orders = new Order();
+        if(!$id){
+        $orders = $orders->orderBy('created_at','desc')->paginate(10);
+        }else{
+            $orders = $orders->with('factore')->find($id);
+        }
+    }
     public function store(Request $request)
     {
         $sans = new Sans();
@@ -54,10 +54,10 @@ class OrderController extends Controller
                 $id = $passenger;
                 $user = Passenger::find($id);
                 $passenger_age = (int)Carbon::parse($user->birth_day)->deff(Carbon::now())->format('%y');
-                if ($passenger_age >=$limited){
+                if ($passenger_age >= $limited) {
                     $order->passengers()->attached($user);
-                }else{
-                    return response()->json(['message'=>'سن گردشگر شما کمتر از حد مجاز است']);
+                } else {
+                    return response()->json(['message' => 'سن گردشگر شما کمتر از حد مجاز است']);
                 }
             }
             $product_id = $request->product_id;
