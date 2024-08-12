@@ -29,9 +29,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
-Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('product.index');
-Route::get('rules/index{id?}',[RulesController::class,'index'])->name('index');
-Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('index');
+Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('products.index');
+Route::get('rules/index{id?}',[RulesController::class,'index'])->name('rules.index');
+Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('blogs.bindex');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
