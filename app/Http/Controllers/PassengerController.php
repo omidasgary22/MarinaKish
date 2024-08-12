@@ -20,9 +20,9 @@ class PassengerController extends Controller
     public function store(Request $request)
     {
         $passenger = new Passenger();
-        $passenger = $passenger->onlyTrash()->where('national_code', $request->national_code)->first();
+        $passenger = $passenger->onlyTrashed()->where('national_code', $request->national_code)->first();
         if (!$passenger) {
-            $passenger = $passenger->created($request->merge(["user_id"=>Auth::id()])->toArray());
+            $passenger = Passenger::create($request->merge(["user_id"=>Auth::id()])->toArray());
         }else{
             $passenger->restore();
             $passenger->update($request->toArray());
