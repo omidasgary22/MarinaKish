@@ -29,6 +29,7 @@ class PermissionSeeder extends Seeder
         $order_create = Permission::create(['name' => 'order.create']);
         $order_delete = Permission::create(['name' => 'order.delete']);
         $order_index = Permission::create(['name' => 'order.index']);
+        $order_admin_index = Permission::create(['name'=>'order.admin.index']);
         $ticket_create = Permission::create(['name' => 'ticket.create']);
         $ticket_update = Permission::create(['name' => 'ticket.update']);
         $ticket_delete = Permission::create(['name' => 'ticket.delete']);
