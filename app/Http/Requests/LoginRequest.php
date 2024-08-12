@@ -26,4 +26,15 @@ class LoginRequest extends FormRequest
             'password' => 'required|string|min:8',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'national_code.required' => 'کد ملی الزامی است.',
+            'national_code.ir_national_code' => 'کد ملی معتبر نمی باشد',
+            'national_code.max' => 'کد ملی نباید بیشتر از ۱۰ کاراکتر باشد.',
+            'password.required' => 'رمز عبور الزامی است.',
+            'password.min' => 'رمز عبور باید حداقل ۸ کاراکتر باشد.',
+        ];
+    }
 }
