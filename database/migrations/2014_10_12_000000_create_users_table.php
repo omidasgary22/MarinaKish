@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->date('birth_day')->nullable();
             $table->dateTime('phone_verified_at');
-            $table->dateTime('email_verivied_at')->nullable();
+            $table->dateTime('email_verified_at')->nullable();
             $table->string('emergency_phone')->nullable();
             $table->timestamps();
             $table->softDeletes();
