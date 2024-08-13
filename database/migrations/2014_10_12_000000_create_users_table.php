@@ -18,9 +18,12 @@ return new class extends Migration
             $table->string('national_code')->unique();
             $table->string('email')->nullable();
             $table->string('phone');
-            $table->enum('gender',['male', 'female'])->nullable();
-            $table->string('password');
+            $table->enum('gender',['mail', 'female'])->nullable();
+            $table->string('password')->nullable();
             $table->date('birth_day')->nullable();
+            $table->dateTime('phone_verified_at');
+            $table->dateTime('email_verivied_at')->nullable();
+            $table->string('emergency_phone')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
