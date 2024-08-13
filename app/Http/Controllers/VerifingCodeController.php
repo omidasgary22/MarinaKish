@@ -19,7 +19,6 @@ class VerifingCodeController extends Controller
                     'type' => 'phone',
                     'code' => $code,
                 ]);
-                require 'autoload.php';
                 $apiKey = "vDV6zMh8GADh2lFq7lKRhko7nq9PALWKI5-iLl3aC50=";
                 $client = new \IPPanel\Client($apiKey);
                 $patternValues = [
