@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'phone'=>fake()->phoneNumber(),
-            'birth_day' => fake()->date()
+            'birth_day' => fake()->date(),
+            'phone_verified_at' => fake()->date(Carbon::now())
         ];
     }
 
