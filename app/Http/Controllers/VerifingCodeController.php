@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifiedCode;
 use App\Models\VerifingCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class VerifingCodeController extends Controller
 {
@@ -31,7 +33,17 @@ class VerifingCodeController extends Controller
                     $patternValues,  // pattern values
                 );
                 return response()->json(['message' => 'کدتایید برای شما ارسال شد']);
-            break;
+                break;
+            case 'email':
+                $email = $request->email;
+                $code = fake()->randomNumber(5, true);
+                $verified->create([
+                    'email' => $email,
+                    'code' => $code
+                ]);
+                Mail::to($email)->send(new VerifiedCode($email, $code));
+                return response()->json(['message' => 'کد تایید برای شما ارسال شد']);
+                break;
         }
     }
 }
