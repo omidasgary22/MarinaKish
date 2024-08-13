@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('veriving_codes', function (Blueprint $table) {
+        Schema::create('verifing_codes', function (Blueprint $table) {
             $table->id();
             $table->string('phone');
-            $table->string('code');
-            $table->enum('type',['phone','email']);
+            $table->integer('code');
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('veriving_codes');
+        Schema::dropIfExists('verifing_codes');
     }
 };

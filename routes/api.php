@@ -11,8 +11,10 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifingCodeController;
 use App\Models\Passenger;
 use App\Models\User;
+use App\Models\VerivingCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,7 @@ Route::post('login', [UserController::class, 'login'])->name('login');
 Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('products.index');
 Route::get('rules/index{id?}',[RulesController::class,'index'])->name('rules.index');
 Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('blogs.bindex');
+Route::post('verifing/{type}',[VerifingCodeController::class,'MakeCode'])->name('make code');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
