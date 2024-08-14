@@ -25,8 +25,8 @@ class PassengerCreateRequest extends FormRequest
             'name' => 'required|max:50',
             'national_code' => 'required|ir_national_code',
             'phone' => 'required|ir_mobile',
-            'birth_date' => 'required|date',
-            'gender' => 'required|in:maile,female',
+            'birth_day' => 'required|date',
+            'gender' => 'required|in:mail,female',
         ];
     }
     public function messages(): array
@@ -38,10 +38,10 @@ class PassengerCreateRequest extends FormRequest
             'national_code.ir_national_code' => '',
             'phone.required' => 'تلفن گردشگر اجباری است',
             'phone.ir_mobile' => 'لفن گردشگر معتبر نمی باشد',
-            'birth_date.required' => 'تاریخ تولد گردشگر اجباری است ',
-            'birth_date.date' => 'تاریخ تولد نا معتبر است',
+            'birth_day.required' => 'تاریخ تولد گردشگر اجباری است ',
+            'birth_day.date' => 'تاریخ تولد نا معتبر است',
             'gender.required' => 'جنسیت گردشگر اجباری است',
-            'gender.in' => 'لطفا جنسیت گردشگر را درس وارد کنید',
+            'gender.in' => 'لطفا جنسیت گردشگر را درست وارد کنید',
         ];
     }
 }

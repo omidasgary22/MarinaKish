@@ -55,7 +55,7 @@ class OrderController extends Controller
                 $user = Passenger::find($id);
                 $passenger_age = (int)Carbon::parse($user->birth_day)->diff(Carbon::now())->format('%y');
                 if ($passenger_age >= $limited) {
-                    $order->passengers()->attache($user);
+                    $order->passengers()->attach($user);
                 } else {
                     return response()->json(['message' => 'سن گردشگر شما کمتر از حد مجاز است']);
                 }
