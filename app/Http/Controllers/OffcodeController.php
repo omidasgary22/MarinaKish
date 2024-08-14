@@ -22,8 +22,10 @@ class OffcodeController extends Controller
     public function store( Request $request)
     {
         $off_code = new Offcode();
+        $code = $request->code;
         $off_code = $off_code->Create($request->toArray());
         return response()->json(['message'=>'کد تخفیف با موفقیت ثبت شد','off code' => $off_code]);
+        NewsController::send($code);
     }
     public function update(Request $request,$id)
     {
