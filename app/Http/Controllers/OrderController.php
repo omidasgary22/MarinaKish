@@ -31,6 +31,7 @@ class OrderController extends Controller
         }else{
             $orders = $orders->with('factore')->find($id);
         }
+        return response()->json(['order'=>$orders]);
     }
     public function store(Request $request)
     {
