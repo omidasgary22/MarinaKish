@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PassengerCreateRequest;
+use App\Http\Requests\PassengerUpdateRequest;
 use App\Models\Passenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +19,7 @@ class PassengerController extends Controller
         }
         return response()->json($passengers);
     }
-    public function store(Request $request)
+    public function store(PassengerCreateRequest $request)
     {
         $passenger = new Passenger();
         $passenger = $passenger->onlyTrashed()->where('national_code', $request->national_code)->first();
@@ -29,7 +31,7 @@ class PassengerController extends Controller
         }
         return response()->json(['message'=>'گردشگر با موفقیت ثبت شد','passenger'=>$passenger]);
     }
-    public function update(Request $request,$id)
+    public function update(PassengerUpdateRequest $request,$id)
     {
         $passenger = new Passenger();
         $passenger = $passenger->find($id);
