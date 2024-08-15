@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\News as MailNews;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -28,7 +29,7 @@ class NewsController extends Controller
    {
        $members = News::all()->toArray();
        foreach ($members as $member) {
-           Mail::to($member['email'])->send(new News($code));
+           Mail::to($member['email'])->send(new MailNews($code));
        }
    }
    public function delete(Request $request)
