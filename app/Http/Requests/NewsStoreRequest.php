@@ -22,7 +22,13 @@ class NewsStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'required'
+        ];
+    }
+    public function messages():array
+    {
+        return [
+            'email.required' => 'ایمیل اجباری است'
         ];
     }
 }
