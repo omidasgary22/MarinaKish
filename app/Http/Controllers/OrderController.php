@@ -58,7 +58,7 @@ class OrderController extends Controller
                 if ($passenger_age >= $limited) {
                     $order->passengers()->attach($user);
                 } else {
-                    return response()->json(['message' => 'سن گردشگر شما کمتر از حد مجاز است']);
+                    return response()->json(['message' => "سن گردشگر{$passenger->name}کمتر از حد مجاز است"]);
                 }
             }
             $product_id = $request->product_id;
