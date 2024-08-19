@@ -47,7 +47,7 @@ class OrderController extends Controller
         $age = (int)Carbon::parse($user->birth_day)->diff(Carbon::now())->format("%y");
         $remaining =  $total - $order_sum;
         $passengers = $request->passengers_id;
-        if ($request->number <= $remaining and $limited <= $age) {
+        if ($request->number <= $remaining and $limited <= $age and $user->email) {
             $order = $order->create($request->merge(['user_id' => Auth::id()])->toArray());
             $order_id = $order->id;
             $order = Order::find($order_id);
