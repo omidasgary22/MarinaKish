@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63614a930c6f13b3c171901284205244",
+    "content-hash": "6e82fbe4a560c76c339934612546aec1",
     "packages": [
+        {
+            "name": "amrmrp/paymentpayping",
+            "version": "0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amrmrp/payping-php-client.git",
+                "reference": "a9a4efd53fc3218d5b94f7b4aba705f85a465909"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amrmrp/payping-php-client/zipball/a9a4efd53fc3218d5b94f7b4aba705f85a465909",
+                "reference": "a9a4efd53fc3218d5b94f7b4aba705f85a465909",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "guzzlehttp/guzzle": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PayPing\\Laravel\\PayPingServiceProvider"
+                    ],
+                    "aliases": {
+                        "Authorization": "PayPing\\Laravel\\Facade\\Authorization",
+                        "Payment": "PayPing\\Laravel\\Facade\\Payment"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helper.php"
+                ],
+                "psr-4": {
+                    "PayPing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "amrmrp",
+                    "email": "amirreza.moghaddampoor@gmail.com"
+                }
+            ],
+            "description": "laravel 8 support",
+            "support": {
+                "source": "https://github.com/amrmrp/payping-php-client/tree/0.0.4"
+            },
+            "time": "2021-11-22T08:43:10+00:00"
+        },
         {
             "name": "beberlei/assert",
             "version": "v3.3.2",
@@ -1772,16 +1827,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.5.1",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "ac815920de0eff6de947eac0a6a94e5ed0fb147c"
+                "reference": "b650144166dfa7703e62a22e493b853b58d874b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/ac815920de0eff6de947eac0a6a94e5ed0fb147c",
-                "reference": "ac815920de0eff6de947eac0a6a94e5ed0fb147c",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/b650144166dfa7703e62a22e493b853b58d874b0",
+                "reference": "b650144166dfa7703e62a22e493b853b58d874b0",
                 "shasum": ""
             },
             "require": {
@@ -1794,8 +1849,8 @@
             },
             "require-dev": {
                 "cebe/markdown": "^1.0",
-                "commonmark/cmark": "0.31.0",
-                "commonmark/commonmark.js": "0.31.0",
+                "commonmark/cmark": "0.31.1",
+                "commonmark/commonmark.js": "0.31.1",
                 "composer/package-versions-deprecated": "^1.8",
                 "embed/embed": "^4.4",
                 "erusev/parsedown": "^1.0",
@@ -1874,7 +1929,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-24T12:52:09+00:00"
+            "time": "2024-08-16T11:46:16+00:00"
         },
         {
             "name": "league/config",
@@ -3771,16 +3826,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "11.8.2",
+            "version": "11.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "5ccca6dee0f5e0a316114181e847d75732fb0b16"
+                "reference": "453054178128b4e12e902651fe8f2afe37a5ba34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/5ccca6dee0f5e0a316114181e847d75732fb0b16",
-                "reference": "5ccca6dee0f5e0a316114181e847d75732fb0b16",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/453054178128b4e12e902651fe8f2afe37a5ba34",
+                "reference": "453054178128b4e12e902651fe8f2afe37a5ba34",
                 "shasum": ""
             },
             "require": {
@@ -3864,7 +3919,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/11.8.2"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/11.8.3"
             },
             "funding": [
                 {
@@ -3876,7 +3931,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-09T09:31:31+00:00"
+            "time": "2024-08-20T09:30:53+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
