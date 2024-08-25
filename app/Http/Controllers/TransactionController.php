@@ -10,7 +10,7 @@ class TransactionController extends Controller
         public static function store($id)
         {
             $price = Factor::find($id)->total_price;
-            $token = config('pay_token');
+            $token = config('services.pay_token');
             $args = [
                 "amount" =>$price,
         "payerIdentity" => "شناسه کاربر در صورت وجود",
