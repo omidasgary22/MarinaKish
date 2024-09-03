@@ -47,18 +47,22 @@ class OrderController extends Controller
         $age = (int)Carbon::parse($user->birth_day)->diff(Carbon::now())->format("%y");
         $remaining =  $total - $order_sum;
         $passengers = $request->passengers_id;
-        if ($request->number <= $remaining and $limited <= $age and $user->email) {
-            $order = $order->create($request->merge(['user_id' => Auth::id()])->toArray());
-            $order_id = $order->id;
-            $order = Order::find($order_id);
-            foreach ($passengers as $passenger) {
-                $id = $passenger;
-                $user = Passenger::find($id);
-                $passenger_age = (int)Carbon::parse($user->birth_day)->diff(Carbon::now())->format('%y');
-                if ($passenger_age >= $limited) {
-                    $order->passengers()->attach($user);
-                } else {
-                    return response()->json(['message' => "سن گردشگر{$passenger->name}کمتر از حد مجاز است"]);
+        if ($user->email) {
+            if($request->number <= $remaining) {
+                if ($limited <= $age) {
+                    $order = $order->create($request->merge(['user_id' => Auth::id()])->toArray());
+                    $order_id = $order->id;
+                    $order = Order::find($order_id);
+                    foreach ($passengers as $passenger) {
+                        $id = $passenger;
+                        $user = Passenger::find($id);
+                        $passenger_age = (int)Carbon::parse($user->birth_day)->diff(Carbon::now())->format('%y');
+                    }
+                    if ($passenger_age >= $limited) {
+                        $order->passengers()->attach($user);
+                    } else {
+                        return response()->json(['message' => "سن گردشگر{$passenger->name}کمتر از حد مجاز است"]);
+                    }
                 }
             }
             $product_id = $request->product_id;
