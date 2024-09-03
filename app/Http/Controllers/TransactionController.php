@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Factor;
+use App\Models\Order;
+use App\Models\Product;
+use Evryn\LaravelToman\Facades\Toman;
+use Evryn\LaravelToman\Money;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -10,25 +14,22 @@ class TransactionController extends Controller
         public static function store($id)
         {
             $price = Factor::find($id)->total_price;
-            $token = config('services.pay_token');
-            $args = [
-                "amount" =>$price,
-        "payerIdentity" => "شناسه کاربر در صورت وجود",
-        "payerName" => "نام کاربر پرداخت کننده",
-        "description" => "توضیحات",
-        "returnUrl" => "آدرس برگشتی از سمت درگاه",
-        "clientRefId" => "شماره فاکتور"
-    ];
+            $mobile =auth()->user()->phone;
+            $email = auth()->user()->email;
+            $request = Toman::amount(Money::Toman($price))
+                ->mobile($mobile)
+                 ->email($email)
+                ->request();
 
-    $payment = new \PayPing\Payment($token);
+            if ($request->successful()) {
+                $transactionId = $request->transactionId();
+                // Store created transaction details for verification
 
-    try {
-        $payment->pay($args);
-    } catch (\Exception $e) {
-        var_dump($e->getMessage());
-    }
-    //echo $payment->getPayUrl();
+                return $request->pay(); // Redirect to payment URL
+            }
 
-    header('Location: ' . $payment->getPayUrl());
+            if ($request->failed()) {
+                return response()->json(['error' => $request->failed()], 400);
+            }
         }
 }
