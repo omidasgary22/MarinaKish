@@ -10,6 +10,7 @@ use App\Http\Controllers\OffcodeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifingCodeController;
 use App\Models\Passenger;
@@ -100,4 +101,7 @@ Route::middleware('auth:sanctum')->controller(PassengerController::class)->prefi
     Route::post('store','store')->middleware('permission:passenger.create')->name('store');
     Route::put('update/{id}','update')->middleware('permission:passenger.update')->name('update');
     Route::delete('delete/{id}','destroy')->middleware('permission:passenger.delete')->name('destroy');
+});
+Route::middleware('auth:sanctum')->controller(TransactionController::class)->prefix('transactions')->as('transactions.')->group(function(){
+    Route::get('store/{id}','store')->name('store');
 });
