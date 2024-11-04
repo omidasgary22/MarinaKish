@@ -15,7 +15,7 @@ class Setting extends Model
     ];
     protected $casts = [
         'key'=>'string',
-        'value'=>'text',
-        'type'=>'string'
+        'value'=>'string',
+        'value' => 'json'
     ];
 }

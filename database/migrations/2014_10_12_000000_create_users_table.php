@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('gender',['mail', 'female'])->nullable();
             $table->string('password');
             $table->date('birth_day')->nullable();
-            $table->dateTime('phone_verified_at');
+            $table->dateTime('phone_verified_at')->nullable();
             $table->dateTime('email_verified_at')->nullable();
             $table->string('emergency_phone')->nullable();
             $table->timestamps();
