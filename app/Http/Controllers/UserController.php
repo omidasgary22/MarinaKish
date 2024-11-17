@@ -25,7 +25,7 @@ class UserController extends Controller
             return response()->json('password wrong');
         }
         $token = $user->createToken($code)->plainTextToken;
-        return response()->json(['token' => $token]);
+        return response()->json(['token' => $token,"role" => $user->getRoleNames()]);
     }
     public function logout()
     {
