@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->string('key');
-            $table->text('value');
+            $table->string('key')->unique();
+            $table->json('value');
         });
     }
 
