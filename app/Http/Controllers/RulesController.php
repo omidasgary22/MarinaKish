@@ -16,7 +16,7 @@ class RulesController extends Controller
     {
         $rules = new Rules();
         if (!$id){
-        $reles = $rules->all()->orderBy('created_at','desc')->paginate(10);
+        $rules = $rules->all();
         }else{
             $rules = $rules->find($id);
         }

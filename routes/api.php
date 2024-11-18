@@ -46,15 +46,14 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::delete('logout','logout')->name('logout');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
-    Route::get('index/admin/{id?}','admin_index')->middleware('permission:product.index')->name('admin index');
+    Route::get('admin/index/{id?}','admin_index')->middleware('permission:product.index')->name('admin index');
     Route::post('store', 'store')->middleware('permission:product.create')->name('store');
     Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
     Route::delete('delete/{id}', 'destroy')->middleware('permission:product.delete')->name('destroy');
     Route::post('restore/{id}', 'restore')->middleware('permission:product.restore')->name('restore');
 });
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
-    Route::get('index/{id?}', 'index')->middleware('permission:order.index')->name('index');
-    Route::get('index/admin/{id?}','admin_index')->middleware('permission:order.admin.index')->name('admin index');
+    Route::get('admin/index/{id?}','admin_index')->middleware('permission:order.admin.index')->name('admin index');
     Route::post('store','store')->middleware('permission:order.create')->name('store');
     Route::delete('cancel/{id}','destroy')->middleware('permission:order.delete')->name('cancel');
 });

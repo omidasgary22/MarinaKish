@@ -25,13 +25,12 @@ class ProductController extends Controller
         }
         return response()->json($products);
     }
-    public function admin_index($id = null)
+    public function admin_index($id =null)
     {
-        $product = new Product();
         if ($id) {
-            $product = $product->with('sans', 'orders', 'comments', 'labels');
+            $product = Product::findOrFail($id)->with('sans', 'orders', 'comments', 'labels');
         } else {
-            $product = $product->all()->orderBy('created_at', 'desc')->paginate(10);
+            $product = Product::all();
         }
         return response()->json(['product' => $product]);
     }
