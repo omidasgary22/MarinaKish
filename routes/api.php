@@ -108,4 +108,5 @@ Route::middleware('auth:sanctum')->controller(TransactionController::class)->pre
 Route::middleware('auth:sanctum')->controller(SettingController::class)->prefix('settings')->as('settings.')->group(function(){
     Route::get('index/{id?}','index')->middleware('permission:setting.index')->name('index');
     Route::put('update/{id}','update')->middleware('permission:setting.update')->name('update');
+    Route::post('logo','logo')->middleware('permission:setting.logo')->name('logo');
 });
