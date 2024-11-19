@@ -34,31 +34,35 @@ class OffcodeController extends Controller
         $off_code->update($request->toArray());
         return response()->json(['message'=>'کد تخفیف با موفقیت به روزرسانی شد','off code'=>$off_code]);
     }
-    public function use(Request $request,$factore_id)
+    public function use(Request $request,$code_id,$factore_id)
     {
         $factor = new Factor();
         $off_code = new Offcode();
-        $off_code = $off_code->where('code',$request->code)->first();
+        $off_code = $off_code->findOrFail($code_id);
         $number = $off_code->number;
         $expire = $off_code->expire_time;
         $today = Carbon::now();
-        if(($number > 0)and($today->lessThan($expire))and !$off_code)
+//        dd($expire,$today);
+        if($number> 0)
         {
-            $factor = $factor->find($factore_id);
-            $price = $factor->total_price;
-            $pricen_nagative = ($price * $off_code->percent)/100;
-            $new_price = $price - $pricen_nagative;
-            $factor->update([
-                'total_price'=>$new_price
-            ]);
-            $number = $number - 1;
-            Offcode::where("code",$request->code)->update([
-                'number'=>$number
-            ]);
-            return response()->json($factor);
-        }else{
-            return response()->json('کد تخفیف معتبر نمی باشد');
+            if($off_code) {
+                if ($today->isBefore($expire)) {
+                    $factor = $factor->find($factore_id);
+                    $price = $factor->total_price;
+                    $pricen_nagative = ($price * $off_code->percent) / 100;
+                    $new_price = $price - $pricen_nagative;
+                    $factor->update([
+                        'total_price' => $new_price
+                    ]);
+                    $number = $number - 1;
+                    Offcode::where("code", $request->code)->update([
+                        'number' => $number
+                    ]);
+                    return response()->json($factor);
+                }
+            }
         }
+        return response()->json('کد تخفیف معتبر نمی باشد');
     }
     public function delete($id)
     {
@@ -70,7 +74,7 @@ class OffcodeController extends Controller
     public function restore($id)
     {
         $off_code = new Offcode();
-        $off_code = $off_code->onlyTrash()->find($id);
+        $off_code = $off_code->onlyTrashed()->find($id);
         $off_code->restore();
         return response()->json(["message"=>'کد تخفیف با موفقیت باز گزدانی شد','off code'=> $off_code]);
     }
