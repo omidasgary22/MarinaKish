@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\logoSettingRequest;
 use App\Models\Media;
 use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -20,7 +21,10 @@ class SettingController extends Controller
     }
     public function update(Request $request)
     {
-        $setting = Setting::find($request->keys())->updated($request->all());
+        $setting = Setting::find($request->keys)->updated([
+            'value' => $request->value,
+            'updated_at' => Carbon::now()
+        ]);
         return response()->json($setting);
     }
     public function logo(logoSettingRequest $request)
@@ -30,6 +34,9 @@ class SettingController extends Controller
         {
             Media::destroy($image->id);
         }
-        Setting::addMedia($request->file('logo'))->toMediaCollection('logo');
+        $logo = Setting::addMedia($request->file('logo'))->toMediaCollection('logo');
+        $logo = $logo->getFullUrl();
+        return response()->json($logo);
+
     }
 }
