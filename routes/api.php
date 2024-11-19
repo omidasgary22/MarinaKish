@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RulesController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OffcodeController;
@@ -103,4 +104,8 @@ Route::middleware('auth:sanctum')->controller(PassengerController::class)->prefi
 });
 Route::middleware('auth:sanctum')->controller(TransactionController::class)->prefix('transactions')->as('transactions.')->group(function(){
     Route::get('store/{id}','store')->name('store');
+});
+Route::middleware('auth:sanctum')->controller(SettingController::class)->prefix('settings')->as('settings.')->group(function(){
+    Route::get('index/{id?}','index')->middleware('permission:setting.index')->name('index');
+    Route::put('update/{id}','update')->middleware('permission:setting.update')->name('update');
 });

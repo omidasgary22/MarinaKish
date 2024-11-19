@@ -58,6 +58,8 @@ class PermissionSeeder extends Seeder
         $passenger_create = Permission::create(['name' => 'passenger.create']);
         $passenger_update = Permission::create(['name' => 'passenger.update']);
         $passenger_delete = Permission::create(['name' => 'passenger.delete']);
+        $setting_index = Permission::create(['name' => 'setting.index']);
+        $setting_update = Permission::create(['name' => 'setting.update']);
 
 
         $admin->givePermissionTo(Permission::all());
