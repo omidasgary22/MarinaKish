@@ -25,7 +25,8 @@ class SettingController extends Controller
             'value' => $request->value,
             'updated_at' => Carbon::now()
         ]);
-        return response()->json($setting);
+        $setting = Setting::findOrFail($id);
+        return response()->json(['message'=>'تنظیمات با موفقیت بروزرسانی شد','setting' => $setting]);
     }
     public function logo(logoSettingRequest $request)
     {
