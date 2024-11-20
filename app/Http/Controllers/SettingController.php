@@ -19,9 +19,9 @@ class SettingController extends Controller
         }
         return response()->json(["setting"=>$settings]);
     }
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $setting = Setting::find($request->keys)->updated([
+        $setting = Setting::find($id)->updated([
             'value' => $request->value,
             'updated_at' => Carbon::now()
         ]);
@@ -29,14 +29,16 @@ class SettingController extends Controller
     }
     public function logo(logoSettingRequest $request)
     {
+        $setting = new Setting();
         $image = Media::where('collection_name','logo')->first();
         if ($image)
         {
             Media::destroy($image->id);
         }
-        $logo = Setting::addMedia($request->file('logo'))->toMediaCollection('logo');
-        $logo = $logo->getFullUrl();
-        return response()->json($logo);
+        $logo = $setting->addMedia($request->file('logo'))->toMediaCollection('logo');
+        $logo = Media::where('collection_name','logo')->getUrl();
+        dd($logo);
+        return response()->json(['logo' => 'لگو با موفقیت آپلود شد']);
 
     }
 }
