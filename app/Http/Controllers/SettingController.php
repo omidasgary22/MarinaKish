@@ -21,11 +21,12 @@ class SettingController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $setting = Setting::find($id)->updated([
+        Setting::find($id)->update([
             'value' => $request->value,
             'updated_at' => Carbon::now()
         ]);
         $setting = Setting::findOrFail($id);
+//        dd($setting);
         return response()->json(['message'=>'تنظیمات با موفقیت بروزرسانی شد','setting' => $setting]);
     }
     public function logo(logoSettingRequest $request)
