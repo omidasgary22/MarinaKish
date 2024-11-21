@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\logoSettingRequest;
-use App\Models\Media;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class SettingController extends Controller
 {
@@ -31,16 +31,25 @@ class SettingController extends Controller
     }
     public function logo(logoSettingRequest $request)
     {
-        $setting = new Setting();
-        $image = Media::where('collection_name','logo')->first();
-        if ($image)
-        {
-            Media::destroy($image->id);
-        }
-        $logo = $setting->addMedia($request->file('logo'))->toMediaCollection('logo');
-        $logo = Media::where('collection_name','logo')->getUrl();
-        dd($logo);
-        return response()->json(['logo' => 'لگو با موفقیت آپلود شد']);
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
 
+            $image = Media::where('collection_name', 'logo')->first();
+            if ($image) {
+                Media::destroy($image->id);
+            }
+            $setting = Setting::first();
+            $logo = $setting->addMedia($request->file('logo'))
+                ->toMediaCollection('logo');
+
+            // گرفتن URL از رسانه جدید
+            $logoUrl = $logo->getUrl();
+
+            return response()->json(['logo' => 'لگو با موفقیت آپلود شد', 'url' => $logoUrl]);
+
+        } else {
+            return response()->json(['error' => 'فایل انتخاب شده نامعتبر است یا وجود ندارد'], 400);
+        }
     }
+
+
 }
