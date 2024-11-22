@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -78,18 +79,15 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'کاربر با موفقیت حذف شد.']);
     }
-    public function resetPassword(Request $request)
+    public function chpassword(ResetpasswordRequest $request)
     {
-        $user = new User();
-        $old_password = $request->old_password;
-        $new_password = $request->new_password;
-        $password = $user->where('id', Auth::id())->first();
-        if (!Hash::check($password->password, $old_password)) {
-            return response()->json('old password wrong');
+        $user = Auth::user();
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json(['error' => 'رمز عبور قبلی اشتباه است'], 400);
         }
-        $password = $password->update(['password' => $new_password])->where('id', Auth::id());
-        $user = $user->where('id', Auth::id())->first();
-        $user->update(['password' => Hash::make($new_password)]);
-        return response()->json($user);
+        $user->update(['password' => Hash::make($request->new_password)]);
+
+        return response()->json(['message' => 'رمز عبور شما با موفقیت تغییر کرد']);
+
     }
 }
