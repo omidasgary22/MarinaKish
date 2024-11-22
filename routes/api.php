@@ -43,7 +43,7 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::get('ME', 'me')->middleware('permission:me')->name('dashboard');
     Route::put('update_profile', 'update')->middleware('permission:profile.update')->name('update_profile');
     Route::delete('delete', 'destroy')->middleware('permission:user.delete')->name('delete');
-    Route::post('reset_password','resetPassword')->middleware('permission:reset.password')->name('reset_password');
+    Route::post('chpass','chpassword')->middleware('permission:reset.password')->name('reset_password');
     Route::delete('logout','logout')->name('logout');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
