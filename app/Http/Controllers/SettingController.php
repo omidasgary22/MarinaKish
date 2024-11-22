@@ -42,7 +42,10 @@ class SettingController extends Controller
                 ->toMediaCollection('logo');
 
             // گرفتن URL از رسانه جدید
-            $logoUrl = $logo->getUrl();
+            $logoUrl = $logo->getFullUrl();
+            Setting::findOrFail(5)->update([
+                'value' => $logoUrl,
+            ]);
 
             return response()->json(['logo' => 'لگو با موفقیت آپلود شد', 'url' => $logoUrl]);
 
