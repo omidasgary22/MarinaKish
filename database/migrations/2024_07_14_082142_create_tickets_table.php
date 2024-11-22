@@ -14,14 +14,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unique('user_id');
             $table->string('title');
             $table->text('body');
             $table->enum('status', ['wating', 'answered'])->default('Wating');
             $table->enum('priority', ['Important', 'medium', 'low']);
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
