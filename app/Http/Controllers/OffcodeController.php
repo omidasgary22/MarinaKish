@@ -41,24 +41,27 @@ class OffcodeController extends Controller
         $off_code = $off_code->findOrFail($code_id);
         $number = $off_code->number;
         $expire = $off_code->expire_time;
+        $start = $off_code->start_time;
         $today = Carbon::now();
 //        dd($expire,$today);
         if($number> 0)
         {
             if($off_code) {
                 if ($today->isBefore($expire)) {
-                    $factor = $factor->find($factore_id);
-                    $price = $factor->total_price;
-                    $pricen_nagative = ($price * $off_code->percent) / 100;
-                    $new_price = $price - $pricen_nagative;
-                    $factor->update([
-                        'total_price' => $new_price
-                    ]);
-                    $number = $number - 1;
-                    Offcode::where("code", $request->code)->update([
-                        'number' => $number
-                    ]);
-                    return response()->json($factor);
+                    if ($today->isAfter($start)) {
+                        $factor = $factor->find($factore_id);
+                        $price = $factor->total_price;
+                        $pricen_nagative = ($price * $off_code->percent) / 100;
+                        $new_price = $price - $pricen_nagative;
+                        $factor->update([
+                            'total_price' => $new_price
+                        ]);
+                        $number = $number - 1;
+                        Offcode::where("code", $request->code)->update([
+                            'number' => $number
+                        ]);
+                        return response()->json($factor);
+                    }
                 }
             }
         }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('percent');
             $table->integer('number');
             $table->datetime('expire_time');
+            $table->datetime('start_time');
             $table->softDeletes();
             $table->timestamps();
 
