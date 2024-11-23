@@ -59,7 +59,9 @@ Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController:
     Route::delete('cancel/{id}','destroy')->middleware('permission:order.delete')->name('cancel');
 });
 Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('media')->as('media.')->group(function () {
-    Route::post('save_image/{model}/{id?}', 'save_image')->name('save');
+    Route::post('save_image/profile', 'profile')->name('profile');
+    Route::post('/save_image/product/{id}', 'product')->name('product');
+    Route::post('save_image/blog/{id}', 'blog')->name('blog');
 });
 Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('tickets')->as('tickets.')->group(function () {
     Route::get('/index/{id?}', 'index')->middleware('permission:ticket.index')->name('index');
