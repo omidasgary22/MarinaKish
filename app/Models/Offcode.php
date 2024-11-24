@@ -15,6 +15,7 @@ class Offcode extends Model
         'percent',
         'number',
         'expire_time',
+        'start_time'
     ];
     protected $casts =[
         'title' => 'string',
@@ -22,5 +23,6 @@ class Offcode extends Model
         'percent' => 'integer',
         'number' => 'integer',
         'expire_time' => 'datetime',
+        'start_time' => 'datetime'
     ];
 }

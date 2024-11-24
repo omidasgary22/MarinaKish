@@ -37,6 +37,7 @@ Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('p
 Route::get('rules/index{id?}',[RulesController::class,'index'])->name('rules.index');
 Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('blogs.bindex');
 Route::post('verifing/{type}',[VerifingCodeController::class,'MakeCode'])->name('make code');
+Route::post('forgot_password',[UserController::class,'forgotPassword'])->name('forgot_password');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
