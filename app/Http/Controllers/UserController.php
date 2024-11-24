@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangepasswordRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetpasswordRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -89,5 +91,28 @@ class UserController extends Controller
 
         return response()->json(['message' => 'رمز عبور شما با موفقیت تغییر کرد']);
 
+    }
+    public function forgotPassword(ChangepasswordRequest $request)
+    {
+        $phone = $request->phone;
+        $password = fake()->randomNumber(8,true);
+        $user = User::where('phone',$phone)->update(['password' => Hash::make($password)]);
+        if ($user) {
+            $patternValues = [
+                "password" => $password,
+            ];
+            $apiKey = "vDV6zMh8GADh2lFq7lKRhko7nq9PALWKI5-iLl3aC50=";
+
+            $client = new \IPPanel\Client($apiKey);
+
+            $messageId = $client->sendPattern(
+                "udd15ycqfsymdyc",    // pattern code
+                "+983000505",      // originator
+                $phone,  // recipient
+                $patternValues  // pattern values
+            );
+            return response()->json(['message' => 'رمز عبور جدید برای شما ارسال شد']);
+        }
+        return \response()->json(['massage' => 'شماره همراه موجود نمی باشد']);
     }
 }
