@@ -12,8 +12,9 @@ class TicketController extends Controller
     {
         if (!$id) {
             $data = Ticket::all();
+        }else {
+            $data = Ticket::findOrFail($id);
         }
-        $data = Ticket::findOrFail($id);
         return response()->json($data);
     }
     public function index($id = null)

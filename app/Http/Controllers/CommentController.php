@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function admin_index($id = null)
+    {
+        if (!$id)
+        {
+            $data = Comment::all();
+        }else {
+            $data = Comment::findOrFail($id);
+        }
+        return response()->json(['data' => $data]);
+    }
     public function index($id = null)
     {
         if (!$id) {
@@ -21,7 +31,7 @@ class CommentController extends Controller
     public function store(CommentRequest $request)
     {
         $comment = Comment::create($request->toArray());
-        return response()->json(['message' => 'نظر با موفقیت ایجاد شد', 'comment' => $comment], 201);
+        return response()->json(['message' => 'نظر با موفقیت ایجاد شد', 'comment' => $comment], 200);
     }
 
     public function update(CommentRequest $request, $id)
