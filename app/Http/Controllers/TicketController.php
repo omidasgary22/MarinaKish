@@ -8,11 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
+    public function admin_index($id = null)
+    {
+        if (!$id) {
+            $data = Ticket::all();
+        }
+        $data = Ticket::findOrFail($id);
+        return response()->json($data);
+    }
     public function index($id = null)
     {
         $tickets = new Ticket();
         if (!$id) {
-            $tickets = $tickets->all();
+            $tickets = $tickets->where('user_id', Auth::id());
         } else {
             $tickets = $tickets->with('user')->findOrFail($id);
         }

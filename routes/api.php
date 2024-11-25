@@ -66,6 +66,7 @@ Route::middleware('auth:sanctum')->controller(MediaController::class)->prefix('m
 });
 Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('tickets')->as('tickets.')->group(function () {
     Route::get('/index/{id?}', 'index')->middleware('permission:ticket.index')->name('index');
+    Route::get('ticket_admin/{id?}','admin_index')->middleware('permission:ticket.admin.index')->name('admin index');
     Route::post('/store','store')->middleware('permission:ticket.create')->name('store');
     Route::put('/update/{id}','update')->middleware('permission:ticket.update')->name('update');
     Route::delete('/delete/{id}','destroy')->middleware('permission:ticket.delete')->name('delete');
