@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -21,9 +22,9 @@ class CommentController extends Controller
     public function index($id = null)
     {
         if (!$id) {
-            $comments = Comment::with('user', 'product')->get();
+            $comments = Comment::where('id',Auth::id())->with('user')->get();
         }else{
-            $comments = Comment::with('user', 'product')->findOrFail($id)->get();
+            $comments = Comment::were('id',Auth::id())->findOrFail($id)->with('user', 'product');
         }
         return response()->json(['comments' => $comments]);
     }

@@ -71,7 +71,7 @@ class PermissionSeeder extends Seeder
             $user_delete,$me,$profile_update,$reset_password,
             $order_create,$order_delete,$order_index,
             $ticket_create,$ticket_update,$ticket_delete,$ticket_index,
-            $comment_create,
+            $comment_create,$comment_index,
             $passenger_index,$passenger_create,$passenger_update,$passenger_delete,
             $off_code_use
         ]);
