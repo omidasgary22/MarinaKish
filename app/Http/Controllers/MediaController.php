@@ -44,4 +44,14 @@ class MediaController extends Controller
                 $image = $model->addMedia($request->image)->toMediaCollection('blog');
                 return response()->json(["message" => "عکس بلاگ با موفقیت اظافه شد",'image' => $image]);
     }
+    public function get_product($id)
+    {
+        $date = Product::findOrFail($id)->getMedia('product');
+        return response()->json(['data' => $date]);
+    }
+    public function get_blog($id)
+    {
+        $data = Blog::findOrFail($id)->getMedia('blog');
+        return response()->json(['data' => $data]);
+    }
 }
