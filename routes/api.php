@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\SettingController;
@@ -38,6 +39,7 @@ Route::get('rules/index{id?}',[RulesController::class,'index'])->name('rules.ind
 Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('blogs.bindex');
 Route::post('verifing/{type}',[VerifingCodeController::class,'MakeCode'])->name('make code');
 Route::post('forgot_password',[UserController::class,'forgotPassword'])->name('forgot_password');
+Route::get('faqs/index/{id?}',[FAQController::class,'index'])->name('index');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
@@ -115,4 +117,10 @@ Route::middleware('auth:sanctum')->controller(SettingController::class)->prefix(
     Route::get('index/{id?}','index')->middleware('permission:setting.index')->name('index');
     Route::put('update/{id}','update')->middleware('permission:setting.update')->name('update');
     Route::post('logo','logo')->middleware('permission:setting.logo')->name('logo');
+});
+Route::middleware('auth:sanctum')->controller(FAQController::class)->prefix('faqs')->as('faqs.')->group(function(){
+    Route::post('store','store')->middleware('permission:faq.create')->name('store');
+    Route::put('update/{id}','update')->middleware('permission:faq.update')->name('update');
+    Route::delete('delete/{id}','destroy')->middleware('permission:faq.delete')->name('destroy');
+    Route::post('restore/{id}','restore')->middleware('permission:faq.restore')->name('restore');
 });
