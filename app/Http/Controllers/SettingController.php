@@ -37,7 +37,7 @@ class SettingController extends Controller
             if ($image) {
                 Media::destroy($image->id);
             }
-            $setting = Setting::first();
+            $setting = Setting::findOrFail(5);
             $logo = $setting->addMedia($request->file('logo'))
                 ->toMediaCollection('logo');
 
