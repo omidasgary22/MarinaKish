@@ -41,7 +41,7 @@ Route::post('verifing/{type}',[VerifingCodeController::class,'MakeCode'])->name(
 Route::post('forgot_password',[UserController::class,'forgotPassword'])->name('forgot_password');
 Route::get('faqs/index/{id?}',[FAQController::class,'index'])->name('index');
 Route::get('media/get_image/product/{id}',[MediaController::class,'get_product'])->name('get_product');
-Route::get('media/get_image/blog/{id}',[MediaController::class,'get_blog'])->name('get_product');
+Route::get('media/get_image/blog/{id}',[MediaController::class,'get_blog'])->name('get_blog');
 
 
 
