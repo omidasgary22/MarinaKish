@@ -4,63 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d568060f6eb1c4eacafc2314e7e55fa",
+    "content-hash": "6fa71f349cc9ff26910249c79cbb3e09",
     "packages": [
-        {
-            "name": "amrmrp/paymentpayping",
-            "version": "0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/amrmrp/payping-php-client.git",
-                "reference": "a9a4efd53fc3218d5b94f7b4aba705f85a465909"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/amrmrp/payping-php-client/zipball/a9a4efd53fc3218d5b94f7b4aba705f85a465909",
-                "reference": "a9a4efd53fc3218d5b94f7b4aba705f85a465909",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-openssl": "*",
-                "guzzlehttp/guzzle": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "PayPing\\Laravel\\PayPingServiceProvider"
-                    ],
-                    "aliases": {
-                        "Authorization": "PayPing\\Laravel\\Facade\\Authorization",
-                        "Payment": "PayPing\\Laravel\\Facade\\Payment"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helper.php"
-                ],
-                "psr-4": {
-                    "PayPing\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "amrmrp",
-                    "email": "amirreza.moghaddampoor@gmail.com"
-                }
-            ],
-            "description": "laravel 8 support",
-            "support": {
-                "source": "https://github.com/amrmrp/payping-php-client/tree/0.0.4"
-            },
-            "time": "2021-11-22T08:43:10+00:00"
-        },
         {
             "name": "beberlei/assert",
             "version": "v3.3.3",
