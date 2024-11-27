@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\logoSettingRequest;
+use App\Http\Requests\LogosettingRequest;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class SettingController extends Controller
 //        dd($setting);
         return response()->json(['message'=>'تنظیمات با موفقیت بروزرسانی شد','setting' => $setting]);
     }
-    public function logo(logoSettingRequest $request)
+    public function logo(LogosettingRequest $request)
     {
         if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
 
