@@ -46,12 +46,32 @@ class MediaController extends Controller
     }
     public function get_product($id)
     {
-        $date = Product::findOrFail($id)->getMedia('product');
-        return response()->json(['data' => $date]);
+        $product = Product::findOrFail($id);
+
+        // دریافت رسانه‌های مربوط به محصول
+        $media = $product->getMedia('product');
+
+        // استخراج URL کامل از هر رسانه
+        $mediaUrls = $media->map(function ($item) {
+            return $item->getFullUrl();
+        });
+
+        // بازگرداندن URL های رسانه‌ها به صورت JSON
+        return response()->json(['data' => $mediaUrls]);
     }
     public function get_blog($id)
     {
-        $data = Blog::findOrFail($id)->getMedia('blog');
-        return response()->json(['data' => $data]);
+        $product = Blog::findOrFail($id);
+
+        // دریافت رسانه‌های مربوط به محصول
+        $media = $product->getMedia('blog');
+
+        // استخراج URL کامل از هر رسانه
+        $mediaUrls = $media->map(function ($item) {
+            return $item->getFullUrl();
+        });
+
+        // بازگرداندن URL های رسانه‌ها به صورت JSON
+        return response()->json(['data' => $mediaUrls]);
     }
 }
