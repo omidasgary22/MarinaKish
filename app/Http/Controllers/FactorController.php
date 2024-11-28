@@ -15,6 +15,7 @@ class FactorController extends Controller
         $price = Product::select('price')->where('id',$product_id)->first()->price;
         $total_price = $price * $number;
         $factor = $factor->create([
+            'product_id' => $product_id,
             'order_id' => $order_id,
             'total_price' => $total_price,
         ]);

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('factors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('product_id')->constrained('products');
             $table->bigInteger('total_price');
             $table->enum('status', ['Paid', 'Awaiting Payment', 'unpaid'])->default('Awaiting Payment');
             $table->timestamps();

@@ -68,6 +68,8 @@ class PermissionSeeder extends Seeder
         $faq_update = Permission::create(['name' => 'faq.update']);
         $faq_delete = Permission::create(['name' => 'faq.delete']);
         $faq_restore = Permission::create(['name' => 'faq.restore']);
+        $report_index = Permission::create(['name' => 'report.index']);
+        $report_show = Permission::create(['name' => 'report.show']);
 
 
         $admin->givePermissionTo(Permission::all());

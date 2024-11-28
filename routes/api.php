@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\PassengerController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
@@ -128,4 +129,8 @@ Route::middleware('auth:sanctum')->controller(FAQController::class)->prefix('faq
     Route::put('update/{id}','update')->middleware('permission:faq.update')->name('update');
     Route::delete('delete/{id}','destroy')->middleware('permission:faq.delete')->name('destroy');
     Route::post('restore/{id}','restore')->middleware('permission:faq.restore')->name('restore');
+});
+Route::middleware('auth:sanctum')->controller(ReportController::class)->prefix('reports')->as('reports.')->group(function(){
+    Route::get('index','allReport')->middleware('permission:report.index')->name('index');
+    Route::post('show/{id}','show')->middleware('permission:report.show')->name('show');
 });

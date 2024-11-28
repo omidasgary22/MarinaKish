@@ -64,4 +64,8 @@ class Product extends Model implements HasMedia
     {
         return $this->hasMany(Sans::class);
     }
+    public function factors():HasMany
+    {
+        return $this->hasMany(Factor::class);
+    }
 }
