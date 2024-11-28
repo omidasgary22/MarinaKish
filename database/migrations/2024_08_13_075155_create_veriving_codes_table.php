@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('phone')->nullable();
             $table->integer('code');
-            $table->string('email')->nullable();
-            $table->dateTime('expire_at')->nullable();
             $table->timestamps();
         });
     }
