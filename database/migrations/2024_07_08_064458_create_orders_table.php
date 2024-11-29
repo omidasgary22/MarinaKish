@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('number');
             $table->integer('sans_id');
             $table->date('day_reserved');
+            $table->string('off_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

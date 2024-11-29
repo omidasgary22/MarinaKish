@@ -20,7 +20,8 @@ class Order extends Model
         'number',
         'factor_id',
         'sans_id',
-        'day_reserved'
+        'day_reserved',
+        'off_code'
     ];
     protected $casts = [
         'user_id' => 'integer',
@@ -29,7 +30,8 @@ class Order extends Model
         'factor_id' => 'integer',
         'number' => 'integer',
         'sans_id' => 'integer',
-        'day_reserved' => 'date'
+        'day_reserved' => 'date',
+        'off_code' => 'string'
     ];
     public function user(): BelongsTo
     {

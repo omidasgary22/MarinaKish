@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Factor;
 use App\Models\Offcode;
+use App\Models\Order;
 use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -59,6 +60,9 @@ class OffcodeController extends Controller
                         $number = $number - 1;
                         Offcode::where("code", $request->code)->update([
                             'number' => $number
+                        ]);
+                        Order::findOrFail($factor->order_id)->update([
+                            'off_code' => $off_code->code,
                         ]);
                         return response()->json($factor);
                     }
