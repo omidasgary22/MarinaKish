@@ -44,6 +44,8 @@ Route::post('forgot_password',[UserController::class,'forgotPassword'])->name('f
 Route::get('faqs/index/{id?}',[FAQController::class,'index'])->name('index');
 Route::get('media/get_image/product/{id}',[MediaController::class,'get_product'])->name('get_product');
 Route::get('media/get_image/blog/{id}',[MediaController::class,'get_blog'])->name('get_blog');
+Route::get('marina_suggestion',[ProductController::class,"MarinaSuggestion"])->name('marina_suggestion');
+Route::get('off_suggestion',[ProductController::class,"OffSuggestion"])->name('off_suggestion');
 
 
 

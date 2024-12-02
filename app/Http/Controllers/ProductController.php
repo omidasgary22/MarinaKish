@@ -84,4 +84,14 @@ class ProductController extends Controller
         $product->restore();
         return response()->json(["message" => 'محصول با موفقیت فعال شد']);
     }
+    public function MarinaSuggestion()
+    {
+        $data = Product::where('marina_suggestion','yes')->get();
+        return response()->json(['data' => $data]);
+    }
+    public function OffSuggestion()
+    {
+        $data = Product::where('off_suggestion','yes')->get();
+        return response()->json(['data' => $data]);
+    }
 }
