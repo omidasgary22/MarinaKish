@@ -94,4 +94,9 @@ class ProductController extends Controller
         $data = Product::where('off_suggestion','yes')->get();
         return response()->json(['data' => $data]);
     }
+    public function Top()
+    {
+        $top = Product::withCount('orders')->orderBy('orders_count', 'desc')->take(10)->get();
+        return response()->json(['top' => $top]);
+    }
 }

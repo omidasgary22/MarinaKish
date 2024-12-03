@@ -46,6 +46,7 @@ Route::get('media/get_image/product/{id}',[MediaController::class,'get_product']
 Route::get('media/get_image/blog/{id}',[MediaController::class,'get_blog'])->name('get_blog');
 Route::get('marina_suggestion',[ProductController::class,"MarinaSuggestion"])->name('marina_suggestion');
 Route::get('off_suggestion',[ProductController::class,"OffSuggestion"])->name('off_suggestion');
+Route::get('top_product',[ProductController::class,"Top"])->name('top_product');
 
 
 
