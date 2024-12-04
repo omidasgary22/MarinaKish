@@ -47,6 +47,8 @@ Route::get('media/get_image/blog/{id}',[MediaController::class,'get_blog'])->nam
 Route::get('marina_suggestion',[ProductController::class,"MarinaSuggestion"])->name('marina_suggestion');
 Route::get('off_suggestion',[ProductController::class,"OffSuggestion"])->name('off_suggestion');
 Route::get('top_product',[ProductController::class,"Top"])->name('top_product');
+Route::get('index/{id?}',[SettingController::class,'index'])->name('setting index');
+
 
 
 
@@ -123,7 +125,6 @@ Route::middleware('auth:sanctum')->controller(TransactionController::class)->pre
     Route::get('store/{id}','store')->name('store');
 });
 Route::middleware('auth:sanctum')->controller(SettingController::class)->prefix('settings')->as('settings.')->group(function(){
-    Route::get('index/{id?}','index')->middleware('permission:setting.index')->name('index');
     Route::put('update/{id}','update')->middleware('permission:setting.update')->name('update');
     Route::post('logo','logo')->middleware('permission:setting.logo')->name('logo');
 });
