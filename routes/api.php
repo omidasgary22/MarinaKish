@@ -47,7 +47,7 @@ Route::get('media/get_image/blog/{id}',[MediaController::class,'get_blog'])->nam
 Route::get('marina_suggestion',[ProductController::class,"MarinaSuggestion"])->name('marina_suggestion');
 Route::get('off_suggestion',[ProductController::class,"OffSuggestion"])->name('off_suggestion');
 Route::get('top_product',[ProductController::class,"Top"])->name('top_product');
-Route::get('index/{id?}',[SettingController::class,'index'])->name('setting index');
+Route::get('settings/index/{id?}',[SettingController::class,'index'])->name('setting index');
 
 
 
