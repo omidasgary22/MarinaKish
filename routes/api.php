@@ -110,7 +110,7 @@ Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix(
 Route::middleware('auth:sanctum')->controller(OffcodeController::class)->prefix('off_codes')->as('off_codes.')->group(function(){
     Route::get('index/{id?}','index')->middleware('permission:off_code.index')->name('index');
     Route::post('store','store')->middleware('permission:off_code.create')->name('store');
-    Route::get('use/{code_id}/{factor_id}','use')->middleware('permission:off_code.use')->name('use');
+    Route::post('use/{code_id}/{factor_id}','use')->middleware('permission:off_code.use')->name('use');
     Route::put("update/{id}",'update')->middleware('permission:off_code.update')->name('update');
     Route::delete('delete/{id}','delete')->middleware('permission:off_code.delete')->name('delete');
     Route::post('restore/{id}','restore')->middleware('permission:off_code.restore')->name('restore');
