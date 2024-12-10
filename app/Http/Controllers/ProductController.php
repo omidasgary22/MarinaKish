@@ -20,10 +20,9 @@ class ProductController extends Controller
     {
         $products = new Product();
         if ($id) {
-            $products = $products->with('sans')->whereHas('comments',function ($q)
-            {
+            $products = $products->with(['sans','comments'=> function ($q){
                 $q->where('status',"approved");
-            })->find($id);
+            }])->find($id);
         } else {
             $products = $products->all();
 
