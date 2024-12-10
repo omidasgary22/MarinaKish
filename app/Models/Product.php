@@ -57,7 +57,7 @@ class Product extends Model implements HasMedia
 
     public function labels(): MorphToMany
     {
-        return $this->morphToMany(Label::class, 'labelable');
+        return $this->morphToMany(Label::class, 'labelable',"labelable");
     }
 
     public function sans(): HasMany

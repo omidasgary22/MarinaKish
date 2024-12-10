@@ -20,18 +20,20 @@ class ProductController extends Controller
     {
         $products = new Product();
         if ($id) {
-            $products = $products->with('sans')->find($id);
-            $comments = Comment::where('product_id', $id)->where('status',"approved")->get();
+            $products = $products->with('sans')->whereHas('comments',function ($q)
+            {
+                $q->where('status',"approved");
+            })->find($id);
         } else {
             $products = $products->all();
-            $comments = null;
+
         }
-        return response()->json($products,$comments);
+        return response()->json($products);
     }
     public function admin_index($id =null)
     {
         if ($id) {
-            $product = Product::findOrFail($id)->with('sans', 'orders', 'comments', 'labels');
+            $product = Product::with('sans', 'orders', 'comments', 'labels')->findOrFail($id);
         } else {
             $product = Product::all();
         }
