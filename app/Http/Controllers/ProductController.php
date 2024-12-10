@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\SansProcessed;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequesr;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Sans;
 use App\Models\User;
@@ -20,10 +21,12 @@ class ProductController extends Controller
         $products = new Product();
         if ($id) {
             $products = $products->with('sans')->find($id);
+            $comments = Comment::where('product_id', $id)->where('status',"approved")->get();
         } else {
             $products = $products->all();
+            $comments = null;
         }
-        return response()->json($products);
+        return response()->json($products,$comments);
     }
     public function admin_index($id =null)
     {
