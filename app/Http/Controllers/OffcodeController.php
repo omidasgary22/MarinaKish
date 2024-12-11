@@ -16,7 +16,7 @@ class OffcodeController extends Controller
         if (!$id) {
             $off_codes = Offcode::all();
         }else{
-             $off_codes = Offcode::findeOrFail($id);
+             $off_codes = Offcode::findOrFail($id);
         }
         return response()->json(['off code'=>$off_codes]);
     }

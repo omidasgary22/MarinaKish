@@ -32,6 +32,7 @@ class User extends Authenticatable implements HasMedia
         'gender',
         'national_code',
         'password',
+        'emergency_phone'
     ];
 
     /**
@@ -60,7 +61,8 @@ class User extends Authenticatable implements HasMedia
         'gender' => 'string',
         'national_code' => 'string',
         'email_verified_at' => 'datetime',
-        'password' => 'hashed'
+        'password' => 'hashed',
+        'emergency_phone' => 'json',
     ];
     public function comments(): HasMany
     {
