@@ -26,7 +26,7 @@ class UserUpdateRequest extends FormRequest
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|string',
             'birth_day' => 'required|date',
-            'gender' => 'required|in:male,female',
+            'gender' => 'required|in:mail,female',
         ];
     }
 
