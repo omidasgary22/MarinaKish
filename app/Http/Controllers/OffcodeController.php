@@ -35,36 +35,28 @@ class OffcodeController extends Controller
         $off_code->update($request->toArray());
         return response()->json(['message'=>'کد تخفیف با موفقیت به روزرسانی شد','off code'=>$off_code]);
     }
-    public function use(Request $request,$code_id,$factore_id)
+    public function use(Request $request,$code_id)
     {
-        $factor = new Factor();
+        $price = $request->price;
         $off_code = new Offcode();
         $off_code = $off_code->findOrFail($code_id);
         $number = $off_code->number;
         $expire = $off_code->expire_time;
         $start = $off_code->start_time;
         $today = Carbon::now();
-//        dd($expire,$today);
         if($number> 0)
         {
             if($off_code) {
                 if ($today->isBefore($expire)) {
                     if ($today->isAfter($start)) {
-                        $factor = $factor->find($factore_id);
-                        $price = $factor->total_price;
-                        $pricen_nagative = ($price * $off_code->percent) / 100;
-                        $new_price = $price - $pricen_nagative;
-                        $factor->update([
-                            'total_price' => $new_price
-                        ]);
+                        $price_nagative = ($price * $off_code->percent) / 100;
+                        $new_price = $price - $price_nagative;
+
                         $number = $number - 1;
                         Offcode::where("code", $request->code)->update([
                             'number' => $number
                         ]);
-                        Order::findOrFail($factor->order_id)->update([
-                            'off_code' => $off_code->code,
-                        ]);
-                        return response()->json($factor);
+                        return response()->json(["new price" => $new_price]);
                     }
                 }
             }
