@@ -66,9 +66,9 @@ class OrderController extends Controller
                     } else {
                         return response()->json(['message' => "سن گردشگر{$passenger->name}کمتر از حد مجاز است"]);
                     }
+                    $price = $request->price;
                     $product_id = $request->product_id;
-                    $number = $request->number;
-                    FactorController::store($order_id, $product_id, $number);
+                    FactorController::store($order_id, $product_id, $price);
                     $order = Order::with('factor')->find($order_id);
                     return response()->json(["message" => 'سفارش با موفقیت ثبت شد', "order" => $order]);
                 }

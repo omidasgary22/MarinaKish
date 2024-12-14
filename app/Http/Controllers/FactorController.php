@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 
 class FactorController extends Controller
 {
-    static function store($order_id,$product_id,$number)
+    static function store($order_id,$product_id,$price)
     {
         $factor = new Factor();
-        $price = Product::select('price')->where('id',$product_id)->first()->price;
-        $total_price = $price * $number;
+        $total_price = $price ;
         $factor = $factor->create([
             'product_id' => $product_id,
             'order_id' => $order_id,
