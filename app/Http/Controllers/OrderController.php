@@ -8,7 +8,6 @@ use App\Models\Product;
 use App\Models\Sans;
 use App\Models\User;
 use Carbon\Carbon;
-use http\Env\Response;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +19,7 @@ class OrderController extends Controller
         $order = new Order();
         $user = new User();
         $user = $user->find(Auth::id());
-        $order = $order->where('user_id', Auth::id())->where('id', $id)->first();
+        $order = $order->where('user_id', Auth::id())->where('id', $id)->with('factor')->first();
         return response()->json($order);
     }
     public function admin_index($id = null)
@@ -29,7 +28,7 @@ class OrderController extends Controller
         if(!$id){
         $orders = $orders->orderBy('created_at','desc')->paginate(10);
         }else{
-            $orders = $orders->with('factore')->find($id);
+            $orders = $orders->with('factor')->find($id);
         }
         return response()->json(['order'=>$orders]);
     }
