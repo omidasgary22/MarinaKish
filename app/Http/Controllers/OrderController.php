@@ -79,6 +79,7 @@ class OrderController extends Controller
         } else {
             return response()->json(["message" => "پرفابل کاربری شما کامل نیس لطفا ان را تکمیل نمایید"]);
         }
+        return response()->json(['message' => "خطادر ثبت سفارش"]);
     }
     public function destroy($id)
     {
