@@ -67,6 +67,8 @@ class OrderController extends Controller
                         return response()->json(['message' => "سن گردشگر{$passenger->name}کمتر از حد مجاز است"]);
                     }
                 }
+            }else{
+                return response()->json(['message' => "ظرفیت پر است"]);
             }
             $product_id = $request->product_id;
             $number = $request->number;
@@ -74,7 +76,7 @@ class OrderController extends Controller
             $order = Order::with('factor')->find($order_id);
             return response()->json(["message" => 'سفارش با موفقیت ثبت شد', "order" => $order]);
         } else {
-            return response()->json(["message" => "ظرفیت پر است یا سن شما کمتر از حد مجاز است"]);
+            return response()->json(["message" => "پرفابل کاربری شما کامل نیس لطفا ان را تکمیل نمایید"]);
         }
     }
     public function destroy($id)
