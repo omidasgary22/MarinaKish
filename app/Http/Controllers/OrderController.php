@@ -19,14 +19,18 @@ class OrderController extends Controller
         $order = new Order();
         $user = new User();
         $user = $user->find(Auth::id());
-        $order = $order->where('user_id', Auth::id())->where('id', $id)->with('factor')->first();
+        if ($id){
+            $order = $order->where('user_id', Auth::id())->where('id', $id)->with('factor')->first();
+        }else{
+            $order =$order->where('user_id', Auth::id())->with('factor:total_price')->get();
+        }
         return response()->json($order);
     }
     public function admin_index($id = null)
     {
         $orders = new Order();
         if(!$id){
-        $orders = $orders->orderBy('created_at','desc')->paginate(10);
+        $orders = $orders->orderBy('created_at','desc')->paginate(10)->with('factor:total_price');
         }else{
             $orders = $orders->with('factor')->find($id);
         }
