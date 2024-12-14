@@ -66,15 +66,16 @@ class OrderController extends Controller
                     } else {
                         return response()->json(['message' => "سن گردشگر{$passenger->name}کمتر از حد مجاز است"]);
                     }
+                    $product_id = $request->product_id;
+                    $number = $request->number;
+                    FactorController::store($order_id, $product_id, $number);
+                    $order = Order::with('factor')->find($order_id);
+                    return response()->json(["message" => 'سفارش با موفقیت ثبت شد', "order" => $order]);
                 }
             }else{
                 return response()->json(['message' => "ظرفیت پر است"]);
             }
-            $product_id = $request->product_id;
-            $number = $request->number;
-            FactorController::store($order_id, $product_id, $number);
-            $order = Order::with('factor')->find($order_id);
-            return response()->json(["message" => 'سفارش با موفقیت ثبت شد', "order" => $order]);
+
         } else {
             return response()->json(["message" => "پرفابل کاربری شما کامل نیس لطفا ان را تکمیل نمایید"]);
         }
