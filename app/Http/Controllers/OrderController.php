@@ -30,7 +30,7 @@ class OrderController extends Controller
     {
         $orders = new Order();
         if(!$id){
-        $orders = $orders->with('factor:total_price')->orderBy('created_at','desc')->paginate(10);
+        $orders = $orders->with('factor:total_price')->get();
         }else{
             $orders = $orders->with('factor')->find($id);
         }
