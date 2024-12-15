@@ -26,7 +26,7 @@ class CommentRequest extends FormRequest
             'product_id' => 'required|exists:products,id',
             'body' => 'nullable|string',
             'answer' => 'nullable|string',
-            'star' => 'integer|in:1,2,3,4,5',
+            'star' => 'integer',
             'status' => 'in:pending,approved,rejected',
         ];
     }
