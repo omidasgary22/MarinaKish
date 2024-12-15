@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class ProductController extends Controller
@@ -24,10 +25,11 @@ class ProductController extends Controller
                 $q->where('status',"approved");
             }])->find($id);
         } else {
-            $products = $products->with(['comments' => function ($q) {
-                $q->avg('star');
-            }])->get();
-
+            $products = $products->withCount([
+                'comments as average_star' => function ($q) {
+                    $q->select(DB::raw('avg(star)'));
+                }
+            ])->get();
         }
         return response()->json($products);
     }
