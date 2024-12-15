@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->text('body')->nullable();
             $table->text('answer')->nullable();
-            $table->enum('star', ['1', '2', '3', '4', '5'])->nullable();
+            $table->integer('star')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->softDeletes();
             $table->timestamps();
