@@ -24,7 +24,9 @@ class ProductController extends Controller
                 $q->where('status',"approved");
             }])->find($id);
         } else {
-            $products = $products->all();
+            $products = $products->with(['comments' => function ($q) {
+                $q->avg('star');
+            }])->get();
 
         }
         return response()->json($products);
