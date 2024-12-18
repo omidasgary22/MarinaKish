@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('body');
+            $table->text('answer')->nullable();
             $table->enum('status', ['wating', 'answered'])->default('Wating');
             $table->enum('priority', ['Important', 'medium', 'low']);
             $table->softDeletes();
