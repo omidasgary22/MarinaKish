@@ -16,10 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
             $table->string('national_code');
-            $table->string('phone');
             $table->date('birth_day');
             $table->enum('gender', ['mail', 'female']);
-            $table->unique(['user_id','phone']);
             $table->softDeletes();
             $table->timestamps();
         });

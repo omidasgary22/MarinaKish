@@ -24,7 +24,6 @@ class PassengerUpdateRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'national_code' => 'required|ir_national_code',
-            'phone' => 'required|ir_mobile',
             'birth_date' => 'required|date',
             'gender' => 'required|in:maile,female',
         ];
@@ -35,9 +34,7 @@ class PassengerUpdateRequest extends FormRequest
             'name.required' => 'نام گردشگر اجباری است',
             'name.max' => 'نام گردشگر مجاز نیست',
             'national_code.required' => 'کد ملی گردشگر اجباری است',
-            'national_code.ir_national_code' => '',
-            'phone.required' => 'تلفن گردشگر اجباری است',
-            'phone.ir_mobile' => 'لفن گردشگر معتبر نمی باشد',
+            'national_code.ir_national_code' => 'کد ملی گردشگر معتبر نیست',
             'birth_date.required' => 'تاریخ تولد گردشگر اجباری است ',
             'birth_date.date' => 'تاریخ تولد نا معتبر است',
             'gender.required' => 'جنسیت گردشگر اجباری است',
