@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    public function Main_Index()
+    {
+        $data = Blog::with('media')->latest(10);
+        return response()->json(['data' => $data]);
+    }
     public function index($id = null)
     {
         if (!$id) {

@@ -43,7 +43,8 @@ Route::get('marina_suggestion',[ProductController::class,"MarinaSuggestion"])->n
 Route::get('off_suggestion',[ProductController::class,"OffSuggestion"])->name('off_suggestion');
 Route::get('top_product',[ProductController::class,"Top"])->name('top_product');
 Route::get('settings/index/{id?}',[SettingController::class,'index'])->name('setting index');
-
+Route::get('main_comment',[CommentController::class,'Main_Index'])->name('main_comment');
+Route::get('main_blog',[BlogController::class,'Main_index'])->name('main_blog');
 
 
 

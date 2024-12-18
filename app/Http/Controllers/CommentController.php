@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    public function Main_Index()
+    {
+     $data = Comment::where('status','approved')->latest(10)->get();
+     return response()->json($data);
+    }
     public function admin_index($id = null)
     {
         if (!$id)
