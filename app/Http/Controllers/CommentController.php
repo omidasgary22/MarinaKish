@@ -11,8 +11,8 @@ class CommentController extends Controller
 {
     public function Main_Index()
     {
-     $data = Comment::where('status','approved')->latest(10)->get();
-     return response()->json($data);
+     $data = Comment::where('status','approved')->with('user:first_name,last_name')->latest()->take(10)->get();
+     return response()->json(['data' => $data]);
     }
     public function admin_index($id = null)
     {
