@@ -25,11 +25,11 @@ class ReportController extends Controller
             $averageRating = $product->comments()->avg('star') ?: 0; // Default to 0 if no reviews
 
             $reports[] = [
-                'تفریح' => $product->name,
-                'تعداد بلیط های فروخته شده' => $soldTicketsCount,
-                'میزان فروش' => $totalSales,
-                'تعداد نظرات ثبت شده' => $reviewsCount,
-                'امتیاز' => $averageRating,
+                'product' => $product->name,
+                'soldTicketsCount' => $soldTicketsCount,
+                'totalSales' => $totalSales,
+                'reviewsCount' => $reviewsCount,
+                'averageRating' => $averageRating,
             ];
         }
 
@@ -66,10 +66,10 @@ class ReportController extends Controller
             ->count();
 
         return response()->json([
-            'تعداد بلیط های فروش رفته' => $ticketsSold,
-            'بیشترین سانس های رزرو شده' => $mostReservedSans,
-            'امتیاز ثبت شده' => $averageRating,
-            'تعداد نظرات' => $totalComments,
+            'ticketsSold' => $ticketsSold,
+            'mostReservedSans' => $mostReservedSans,
+            'averageRating' => $averageRating,
+            'totalComments' => $totalComments,
         ]);
     }
 }
