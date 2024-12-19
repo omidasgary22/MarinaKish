@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentUpdateRequest;
 
 class CommentController extends Controller
 {
@@ -36,11 +36,11 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request)
     {
-        $comment = Comment::create($request->toArray());
+        $comment = Comment::create($request->merge(['user_id' => Auth::id()])->toArray());
         return response()->json(['message' => 'نظر با موفقیت ایجاد شد', 'comment' => $comment], 200);
     }
 
-    public function update(CommentRequest $request, $id)
+    public function update(CommentUpdateRequest $request, $id)
     {
         $comment = Comment::findOrFail($id);
         $comment->update($request->toArray());
