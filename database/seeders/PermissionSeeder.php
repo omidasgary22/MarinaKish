@@ -70,6 +70,8 @@ class PermissionSeeder extends Seeder
         $faq_restore = Permission::create(['name' => 'faq.restore']);
         $report_index = Permission::create(['name' => 'report.index']);
         $report_show = Permission::create(['name' => 'report.show']);
+        $news_index = Permission::create(['name' => 'news.index']);
+        $news_delete = Permission::create(['name' => 'news.delete']);
 
 
         $admin->givePermissionTo(Permission::all());
@@ -79,7 +81,8 @@ class PermissionSeeder extends Seeder
             $ticket_create,$ticket_delete,$ticket_index,
             $comment_create,$comment_index,
             $passenger_index,$passenger_create,$passenger_update,$passenger_delete,
-            $off_code_use
+            $off_code_use,
+            $news_delete
         ]);
     }
 }

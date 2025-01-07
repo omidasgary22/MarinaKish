@@ -46,6 +46,8 @@ Route::get('top_product',[ProductController::class,"Top"])->name('top_product');
 Route::get('settings/index/{id?}',[SettingController::class,'index'])->name('setting index');
 Route::get('main_comment',[CommentController::class,'Main_Index'])->name('main_comment');
 Route::get('main_blog',[BlogController::class,'Main_index'])->name('main_blog');
+Route::post('/news_join',[NewsController::class,'store'])->name('news_join');
+
 
 
 
@@ -137,6 +139,5 @@ Route::middleware('auth:sanctum')->controller(ReportController::class)->prefix('
 });
 Route::middleware('auth:sanctum')->controller(NewsController::class)->prefix('news')->as('news.')->group(function(){
     Route::get('index','index')->middleware('permission:news.index')->name('index');
-    Route::post('store','store')->middleware('permission:news.create')->name('store');
     Route::delete('delete/{id}','delete')->middleware('permission:news.delete')->name('delete');
 });
