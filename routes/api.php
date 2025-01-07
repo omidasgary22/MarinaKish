@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OffcodeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PassengerController;
@@ -133,4 +134,9 @@ Route::middleware('auth:sanctum')->controller(FAQController::class)->prefix('faq
 Route::middleware('auth:sanctum')->controller(ReportController::class)->prefix('reports')->as('reports.')->group(function(){
     Route::get('index','allReport')->middleware('permission:report.index')->name('index');
     Route::post('show/{id}','show')->middleware('permission:report.show')->name('show');
+});
+Route::middleware('auth:sanctum')->controller(NewsController::class)->prefix('news')->as('news.')->group(function(){
+    Route::get('index','index')->middleware('permission:news.index')->name('index');
+    Route::post('store','store')->middleware('permission:news.create')->name('store');
+    Route::delete('delete/{id}','delete')->middleware('permission:news.delete')->name('delete');
 });
