@@ -12,7 +12,7 @@ class NewsController extends Controller
 {
    public function index()
    {
-       $news = News::all()->sortByDesc('created_at')->paginate(10);
+       $news = News::all();
        return response()->json(['news_member'=>$news]);
    }
    public function store(NewsStoreRequest $request)
