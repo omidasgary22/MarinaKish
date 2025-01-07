@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewsStoreRequest;
 use App\Mail\News as MailNews;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class NewsController extends Controller
        $news = News::all()->sortByDesc('created_at')->paginate(10);
        return response()->json(['news_member'=>$news]);
    }
-   public function store(Request $request)
+   public function store(NewsStoreRequest $request)
    {
        $restore = News::onlyTrashed()->where('email',$request)->first();
        if ($restore)
