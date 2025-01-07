@@ -22,7 +22,7 @@ class NewsController extends Controller
        {
            $restore->restore();
        }else {
-           News::created($request);
+           News::create($request->all());
        }
        return response()->json(['news_member'=>'شما با موفقیت در خبرنامه عضو شدید']);
    }
