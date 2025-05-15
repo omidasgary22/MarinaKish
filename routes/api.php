@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\OffcodeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
+use App\Models\Passenger;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +29,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [UserController::class, 'create'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('login');
-Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('product.index');
-Route::get('rules/index{id?}',[RulesController::class,'index'])->name('index');
-Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('index');
+Route::get('products/index/{id?}',[ProductController::class ,'index'] )->name('products.index');
+Route::get('rules/index{id?}',[RulesController::class,'index'])->name('rules.index');
+Route::get('blogs/index/{id?}',[BlogController::class,'index'])->name('blogs.bindex');
 
 Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('index', 'index')->middleware('permission:user.index')->name('index');
@@ -39,6 +42,7 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('us
     Route::delete('logout','logout')->name('logout');
 });
 Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix('products')->group(function () {
+    Route::get('index/admin/{id?}','admin_index')->middleware('permission:product.index')->name('admin index');
     Route::post('store', 'store')->middleware('permission:product.create')->name('store');
     Route::put('update/{id}',  'update')->middleware('permission:product.update')->name('update');
     Route::delete('delete/{id}', 'destroy')->middleware('permission:product.delete')->name('destroy');
@@ -46,6 +50,7 @@ Route::middleware('auth:sanctum')->controller(ProductController::class)->prefix(
 });
 Route::middleware('auth:sanctum')->prefix('orders')->controller(OrderController::class)->as('orders.')->group(function (){
     Route::get('index/{id?}', 'index')->middleware('permission:order.index')->name('index');
+    Route::get('index/admin/{id?}','admin_index')->middleware('permission:order.admin.index')->name('admin index');
     Route::post('store','store')->middleware('permission:order.create')->name('store');
     Route::delete('cancel/{id}','destroy')->middleware('permission:order.delete')->name('cancel');
 });
@@ -59,6 +64,7 @@ Route::middleware('auth:sanctum')->controller(TicketController::class)->prefix('
     Route::delete('/delete/{id}','destroy')->middleware('permission:ticket.delete')->name('delete');
 });
 Route::middleware('auth:sanctum')->controller(RulesController::class)->prefix('rules')->as('rules.')->group(function () {
+    Route::get('index/admin/{id?}','admin_index')->middleware('permission:rule.index')->name('admin index');
     Route::post('/store','store')->middleware('permission:rule.create')->name('store');
     Route::put('/update/{id}','update')->middleware('permission:rule.update')->name('update');
     Route::delete('/delete/{id}','destroy')->middleware('permission:rule.delete')->name('destroy');
@@ -66,7 +72,7 @@ Route::middleware('auth:sanctum')->controller(RulesController::class)->prefix('r
 });
 
 Route::middleware('auth:sanctum')->controller(BlogController::class)->prefix('blogs')->as('blogs.')->group(function () {
-
+    Route::get('index/admin/{id?}')->middleware('permission:blog.index')->name('admin index');
     Route::post('/store','store')->middleware('permission:blog.create')->name('store');
     Route::put('/update/{id}','update')->middleware('permission:blog.update')->name('update');
     Route::delete('/delete/{id}','destroy')->middleware('permission:blog.delete')->name('destroy');
@@ -78,4 +84,17 @@ Route::middleware('auth:sanctum')->controller(CommentController::class)->prefix(
     Route::delete('/delete/{id}','destroy')->middleware('permission:comment.delete')->name('destroy');
     Route::post('/restore/{id}','restore')->middleware('permission:comment.restore')->name('restore');
 });
-
+Route::middleware('auth:sanctum')->controller(OffcodeController::class)->prefix('off_codes')->as('off_codes.')->group(function(){
+    Route::get('index/{id?}','index')->middleware('permission:off_code.index')->name('index');
+    Route::post('store','store')->middleware('permission:off_code.create')->name('store');
+    Route::get('use/{code_id}/{factor_id}','use')->middleware('permission:off_code.use')->name('use');
+    Route::put("update/{id}",'update')->middleware('permission:off_code.update')->name('update');
+    Route::delete('delete/{id}','delete')->middleware('permission:off_code.delete')->name('delete');
+    Route::post('restore/{id}','restore')->middleware('permission:off_code.restore')->name('restore');
+});
+Route::middleware('auth:sanctum')->controller(PassengerController::class)->prefix('passengers')->as('passengers.')->group(function(){
+    Route::get('index/{id?}','index')->middleware('permission:passenger.index')->name('index');
+    Route::post('store','store')->middleware('permission:passenger.create')->name('store');
+    Route::put('update/{id}','update')->middleware('permission:passenger.update')->name('update');
+    Route::delete('delete/{id}','destroy')->middleware('permission:passenger.delete')->name('destroy');
+});

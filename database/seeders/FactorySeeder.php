@@ -21,6 +21,7 @@ class FactorySeeder extends Seeder
             'phone' => '09120000000',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin'),
+            'birth_day'=>"2000-01-01"
         ])->create();
         $admin->assignRole('admin');
     }

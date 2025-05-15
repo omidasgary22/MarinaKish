@@ -12,11 +12,21 @@ class RulesController extends Controller
         $rules = Rules::all();
         return response()->json(['rules' => $rules]);
     }
+    public function admin_index($id = null)
+    {
+        $rules = new Rules();
+        if (!$id){
+        $reles = $rules->all()->orderBy('created_at','desc')->paginate(10);
+        }else{
+            $rules = $rules->find($id);
+        }
+        return response()->json(['rules'=>$rules]);
+    }
 
     public function store(Request $request)
     {
         $rule = Rules::create($request->all());
-        return response()->json(['message' => 'قانون با موفقیت ایجاد شد', 'rule' => $rule], 201);
+        return response()->json(['message' => 'قانون با موفقیت ایجاد شد', 'rule' => $rule], 200);
     }
 
     public function update(Request $request, $id)

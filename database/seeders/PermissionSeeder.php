@@ -35,6 +35,7 @@ class PermissionSeeder extends Seeder
         $me = Permission::create(['name' => 'me']);
         $profile_update = Permission::create(['name' => 'profile.update']);
         $reset_password = Permission::create(['name' => 'reset.password']);
+        $product_index = Permission::create(['name'=>'product.index']);
         $product_create = Permission::create(['name' => 'product.create']);
         $product_update = Permission::create(['name' => 'product.update']);
         $product_delete = Permission::create(['name' => 'product.delete']);
@@ -42,23 +43,36 @@ class PermissionSeeder extends Seeder
         $order_create = Permission::create(['name' => 'order.create']);
         $order_delete = Permission::create(['name' => 'order.delete']);
         $order_index = Permission::create(['name' => 'order.index']);
+<<<<<<< HEAD
         Permission::create(['name' => 'order.update']);
+=======
+        $order_admin_index = Permission::create(['name'=>'order.admin.index']);
+>>>>>>> 9e808045f4ae17e7b66a800af1923d074fd61bf9
         $ticket_create = Permission::create(['name' => 'ticket.create']);
         $ticket_update = Permission::create(['name' => 'ticket.update']);
         $ticket_delete = Permission::create(['name' => 'ticket.delete']);
         $ticket_index = Permission::create(['name' => 'ticket.index']);
+<<<<<<< HEAD
         Permission::create(['name' => 'rule.index']);
+=======
+        $rule_index = Permission::create(['name'=>'rule.index']);
+>>>>>>> 9e808045f4ae17e7b66a800af1923d074fd61bf9
         $rule_create = Permission::create(['name' => 'rule.create']);
         $rule_update = Permission::create(['name' => 'rule.update']);
         $rule_delete = Permission::create(['name' => 'rule.delete']);
         $rule_restore = Permission::create(['name' => 'rule.restore']);
+<<<<<<< HEAD
         Permission::create(['name' => 'blog.index']);
+=======
+        $blog_index = Permission::create(['name'=>'blog.index']);
+>>>>>>> 9e808045f4ae17e7b66a800af1923d074fd61bf9
         $blog_create = Permission::create(['name' => 'blog.create']);
         $blog_update = Permission::create(['name' => 'blog.update']);
         $blog_delete = Permission::create(['name' => 'blog.delete']);
         $comment_create = Permission::create(['name' => 'comment.create']);
         $comment_delete = Permission::create(['name' => 'comment.delete']);
         $comment_restore = Permission::create(['name' => 'comment.restore']);
+<<<<<<< HEAD
         $comment_index = Permission::create(['name' => 'comment.index']);
 
         $admin->givePermissionTo(Permission::all());
@@ -75,6 +89,27 @@ class PermissionSeeder extends Seeder
             $ticket_delete,
             $ticket_index,
             $comment_create
+=======
+        $comment_index = Permission::create(['name'=>'comment.index']);
+        $off_code_index = Permission::create(['name' => 'off_code.index']);
+        $off_code_update = Permission::create(['name' => 'off_code.update']);
+        $off_code_delete = Permission::create(['name' => 'off_code.delete']);
+        $off_code_restore = Permission::create(['name' => 'off_code.restore']);
+        $off_code_create = Permission::create(['name' => 'off_code.create']);
+        $passenger_index = Permission::create(['name' => 'passenger.index']);
+        $passenger_create = Permission::create(['name' => 'passenger.create']);
+        $passenger_update = Permission::create(['name' => 'passenger.update']);
+        $passenger_delete = Permission::create(['name' => 'passenger.delete']);
+
+
+        $admin->givePermissionTo(Permission::all());
+        $user->givePermissionTo([
+            $user_delete,$me,$profile_update,$reset_password,
+            $order_create,$order_delete,$order_index,
+            $ticket_create,$ticket_update,$ticket_delete,$ticket_index,
+            $comment_create,
+            $passenger_index,$passenger_create,$passenger_update,$passenger_delete,
+>>>>>>> 9e808045f4ae17e7b66a800af1923d074fd61bf9
         ]);
     }
 }

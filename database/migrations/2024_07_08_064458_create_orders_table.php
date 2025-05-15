@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
             $table->integer('product_id');
             $table->unsignedBigInteger('factor_id')->nullable();
-            $table->unique(['user_id', 'factor_id']);
+            $table->unsignedBigInteger('user_id');
+            $table->unique('factor_id');
             $table->integer('number');
             $table->enum('status', ['payment', 'Awaiting Payment', 'Cancellation'])->default('Awaiting Payment');
             $table->integer('sans_id');

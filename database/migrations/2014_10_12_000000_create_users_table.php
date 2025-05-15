@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('national_code')->unique();
             $table->string('email')->nullable();
             $table->string('phone');
+            $table->enum('gender',['male', 'female'])->nullable();
             $table->string('password');
             $table->date('birth_day')->nullable();
             $table->timestamps();
